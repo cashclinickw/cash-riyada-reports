@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cash Riyada — لوحة التحكم</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root{
+    --teal:#2B898C; --teal-2:#3EADAD; --ink:#2E1748; --pale:#D6EAF2;
+    --cream:#FFE7BC; --green:#27ae60; --red:#c0392b; --line:#d7e6ec; --muted:#6b7a86;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:"Segoe UI",Tahoma,system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 420px at 88% -12%, #d7f0ef, transparent),
+      radial-gradient(760px 380px at 6% 108%, #e7f4ef, transparent),
+      #eef5f8;
+    display:flex;align-items:center;justify-content:center;padding:30px}
+  .wrap{width:100%;max-width:820px}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .brand img{width:60px;height:60px;object-fit:contain}
+  .brand h1{margin:0;font-size:23px;font-weight:800;color:var(--ink);letter-spacing:.2px}
+  .brand .sub{font-size:12.5px;color:var(--teal);margin-top:3px;font-weight:700}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  @media(max-width:580px){.grid{grid-template-columns:1fr}}
+  .card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:18px;
+    padding:22px;text-decoration:none;color:inherit;box-shadow:0 6px 20px rgba(46,23,72,.06);
+    transition:transform .13s,box-shadow .13s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(43,137,140,.16)}
+  .card::after{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--teal)}
+  .card.alt::after{background:var(--cream)}
+  .card .ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+    font-size:21px;background:#e7f4f4;color:var(--teal)}
+  .card.alt .ic{background:#fff5e3;color:#b9832a}
+  .card .t{font-weight:800;font-size:16.5px;margin-top:12px;color:var(--ink)}
+  .card .d{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.75}
+  .tools{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;
+    box-shadow:0 6px 20px rgba(46,23,72,.06)}
+  .tools h3{margin:0 0 4px;font-size:14px;color:var(--ink)}
+  .tools p{margin:0 0 13px;font-size:12px;color:var(--muted);line-height:1.75}
+  .btn{border:0;border-radius:11px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-teal:hover{background:#24777a}
+  #sync-msg{font-size:12.5px;font-weight:700;margin-top:11px;min-height:16px}
+  footer{margin-top:22px;text-align:center;font-size:11.5px;color:#8a97a2}
+  footer b{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <img src="logo.png" alt="Cash Riyada">
+    <div>
+      <h1>Cash Riyada</h1>
+      <div class="sub">نظام متابعة استشارات الأعمال</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="docs.html">
+      <div class="ic">📝</div>
+      <div class="t">استشارة جديدة</div>
+      <div class="d">افتح تقرير الاستشارة الكامل، عبّئ بيانات العميل، واحفظه في السحابة.</div>
+    </a>
+    <a class="card alt" href="pipeline.html">
+      <div class="ic">📋</div>
+      <div class="t">لوحة الحالات</div>
+      <div class="d">تابع كل العملاء حسب المرحلة: جديد ← الجلسة الأولى ← التحليل ← خطة العمل ← مكتمل.</div>
+    </a>
+  </div>
+
+  <div class="tools">
+    <h3>مزامنة العملاء المحفوظين محلياً</h3>
+    <p>إذا عندك عملاء محفوظين على هذا الجهاز من قبل ربط السحابة، ارفعهم دفعة وحدة إلى مشروع Cash Riyada السحابي.</p>
+    <button class="btn btn-teal" id="sync-btn" onclick="syncAll()">☁ رفع العملاء المحليين للسحابة</button>
+    <div id="sync-msg"></div>
+  </div>
+
+  <footer>Cash Riyada · قسم من <b>Cash Clinic</b> · الاستضافة على GitHub Pages</footer>
+</div>
+
+<script src="cash-riyada-cloud.js"></script>
+<script>
+  async function syncAll(){
+    var msg=document.getElementById("sync-msg"), btn=document.getElementById("sync-btn");
+    if(!window.CRCloud){ msg.textContent="خطأ: لم يُحمّل ملف cash-riyada-cloud.js"; return; }
+    btn.disabled=true; msg.style.color="#6b7a86"; msg.textContent="جارٍ الرفع…";
+    var r=await window.CRCloud.syncAllLocal();
+    btn.disabled=false;
+    if(r&&r.ok){ msg.style.color="#27ae60"; msg.textContent="تم رفع "+r.synced+" من "+r.total+" عميل إلى السحابة."; }
+    else { msg.style.color="#c0392b"; msg.textContent="تعذّرت المزامنة. تأكد من إعدادات Firebase في cash-riyada-cloud.js."; }
+  }
+</script>
+</body>
+</html>

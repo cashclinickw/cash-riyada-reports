@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحة الحالات | Cash Riyada</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root{
+    --teal:#2B898C; --teal-2:#3EADAD; --ink:#2E1748; --pale:#D6EAF2;
+    --cream:#FFE7BC; --green:#27ae60; --red:#c0392b; --line:#d7e6ec; --muted:#6b7a86; --bg:#eef5f8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",Tahoma,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+  header{background:linear-gradient(135deg,var(--ink),#3a2260);color:#fff;padding:16px 22px;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    box-shadow:0 6px 22px rgba(46,23,72,.25)}
+  header .h-l{display:flex;align-items:center;gap:12px}
+  header img{width:42px;height:42px;object-fit:contain}
+  header h1{margin:0;font-size:19px;font-weight:800}
+  header .sub{font-size:11.5px;opacity:.8;margin-top:2px}
+  .top-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{border:0;border-radius:10px;padding:8px 13px;font-family:inherit;font-size:12.5px;font-weight:800;
+    cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-ghost{background:rgba(255,255,255,.15);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.26)}
+
+  .stats{display:flex;gap:10px;flex-wrap:wrap;padding:16px 22px 4px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 16px;min-width:96px;
+    box-shadow:0 3px 10px rgba(46,23,72,.05)}
+  .stat .n{font-size:22px;font-weight:800;color:var(--teal)}
+  .stat .l{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px}
+
+  .board{display:flex;gap:14px;padding:14px 22px 44px;overflow-x:auto;align-items:flex-start}
+  .col{background:#fff;border:1px solid var(--line);border-radius:15px;min-width:274px;width:274px;flex:0 0 auto;
+    box-shadow:0 3px 12px rgba(46,23,72,.05);overflow:hidden}
+  .col-head{padding:11px 13px;border-bottom:1px solid var(--line);display:flex;align-items:center;
+    justify-content:space-between;gap:8px}
+  .col-head .name{font-weight:800;font-size:13.5px;display:flex;align-items:center;gap:7px}
+  .col-head .dot{width:11px;height:11px;border-radius:50%}
+  .col-head .cnt{background:#eef5f8;border-radius:20px;padding:1px 10px;font-size:12px;font-weight:800;color:var(--ink)}
+  .col-body{padding:10px;min-height:60px;display:flex;flex-direction:column;gap:9px;background:#fafcfd}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;
+    box-shadow:0 2px 7px rgba(46,23,72,.06)}
+  .card .label{font-weight:800;font-size:13.5px;color:var(--ink)}
+  .card .company{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .pill{font-size:10.5px;font-weight:700;background:#eef5f8;color:#4a5866;border-radius:20px;padding:2px 8px}
+  .card .row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+  .mini{border:0;border-radius:8px;padding:5px 9px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .mini-open{background:var(--teal);color:#fff}
+  .mini-move{background:#eef5f8;color:var(--ink);border:1px solid var(--line)!important}
+  .mini-del{background:#fdecec;color:var(--red);border:1px solid #f6c9c9!important}
+  .move-menu{margin-top:7px;display:none;flex-wrap:wrap;gap:5px}
+  .move-menu.open{display:flex}
+  .move-opt{font-size:10.5px;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:7px;
+    padding:4px 8px;cursor:pointer}
+  .empty{color:#9fb0ba;font-size:11.5px;text-align:center;padding:14px 6px}
+  .state{padding:40px 22px;text-align:center;color:var(--muted)}
+  .cfg-warn{margin:14px 22px 0;background:#fff7e6;border:1px solid #f0d79a;color:#7a5b00;border-radius:13px;
+    padding:12px 15px;font-size:12.5px;line-height:1.7;font-weight:600;display:none}
+  code{background:#eef5f8;border-radius:5px;padding:1px 6px;font-size:11.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-l">
+    <img src="logo.png" alt="Cash Riyada">
+    <div>
+      <h1>لوحة حالات العملاء</h1>
+      <div class="sub">Cash Riyada — متابعة الاستشارات حسب المرحلة</div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <a class="btn btn-teal" href="docs.html">＋ استشارة جديدة</a>
+    <button class="btn btn-ghost" onclick="loadBoard()">↻ تحديث</button>
+    <a class="btn btn-ghost" href="dashboard.html">الرئيسية</a>
+  </div>
+</header>
+
+<div id="cfg-warn" class="cfg-warn">
+  ⚠ لم تُضف إعدادات Firebase بعد. افتح <code>cash-riyada-cloud.js</code> وألصق إعدادات مشروع Cash Riyada
+  مكان قيم <code>PASTE_*</code>. راجع <code>README.md</code>.
+</div>
+
+<div class="stats" id="stats"></div>
+<div id="state" class="state">جارٍ تحميل الحالات من السحابة…</div>
+<div class="board" id="board" style="display:none"></div>
+
+<script src="cash-riyada-cloud.js"></script>
+<script>
+  function esc(s){return (s==null?"":String(s)).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function card(c){
+    var moveOpts=(window.CR_STATUS||[]).filter(function(s){return s.key!==c.status;})
+      .map(function(s){return '<span class="move-opt" style="color:'+s.color+'" '+
+        'onclick="moveClient(\''+c.id+'\',\''+s.key+'\')">'+esc(s.label)+'</span>';}).join("");
+    var meta=[];
+    if(c.company) meta.push('<span class="pill">🏢 '+esc(c.company)+'</span>');
+    if(c.sector)  meta.push('<span class="pill">'+esc(c.sector)+'</span>');
+    if(c.date)    meta.push('<span class="pill">📅 '+esc(c.date)+'</span>');
+    if(c.phone)   meta.push('<span class="pill">📞 '+esc(c.phone)+'</span>');
+    return '<div class="card">'+
+      '<div class="label">'+esc(c.label)+'</div>'+
+      (c.company?'<div class="company">'+esc(c.company)+'</div>':'')+
+      (meta.length?'<div class="meta">'+meta.join("")+'</div>':'')+
+      '<div class="row">'+
+        '<a class="mini mini-open" href="docs.html?client='+encodeURIComponent(c.id)+'">✎ فتح للتعديل</a>'+
+        '<button class="mini mini-move" onclick="toggleMove(this)">↔ نقل</button>'+
+        '<button class="mini mini-del" onclick="delClient(\''+c.id+'\')">🗑 حذف</button>'+
+      '</div>'+
+      '<div class="move-menu">'+moveOpts+'</div></div>';
+  }
+  function toggleMove(btn){ btn.closest(".card").querySelector(".move-menu").classList.toggle("open"); }
+  async function moveClient(id,status){
+    var r=await window.CRCloud.setStatus(id,status);
+    if(r&&r.ok){ loadBoard(); } else { alert("تعذّر نقل الحالة: "+((r&&r.error)||"")); }
+  }
+  async function delClient(id){
+    if(!confirm("حذف هذا العميل نهائياً من السحابة؟")) return;
+    var r=await window.CRCloud.deleteClient(id);
+    if(r&&r.ok){ loadBoard(); } else { alert("تعذّر الحذف: "+((r&&r.error)||"")); }
+  }
+  function render(list){
+    var statuses=window.CR_STATUS||[];
+    var total=list.length, counts={}; statuses.forEach(function(s){counts[s.key]=0;});
+    list.forEach(function(c){ counts[c.status]=(counts[c.status]||0)+1; });
+    var sHtml='<div class="stat"><div class="n">'+total+'</div><div class="l">إجمالي العملاء</div></div>';
+    statuses.forEach(function(s){ sHtml+='<div class="stat"><div class="n" style="color:'+s.color+'">'+
+      (counts[s.key]||0)+'</div><div class="l">'+esc(s.label)+'</div></div>'; });
+    document.getElementById("stats").innerHTML=sHtml;
+    var board=document.getElementById("board"); board.innerHTML="";
+    statuses.forEach(function(s){
+      var items=list.filter(function(c){return c.status===s.key;})
+                    .sort(function(a,b){return (b.savedAt||0)-(a.savedAt||0);});
+      var col=document.createElement("div"); col.className="col";
+      col.innerHTML='<div class="col-head" style="background:'+s.color+'14">'+
+          '<div class="name"><span class="dot" style="background:'+s.color+'"></span>'+esc(s.label)+'</div>'+
+          '<span class="cnt">'+items.length+'</span></div>'+
+        '<div class="col-body">'+(items.length?items.map(card).join(""):'<div class="empty">لا يوجد</div>')+'</div>';
+      board.appendChild(col);
+    });
+    document.getElementById("state").style.display="none"; board.style.display="flex";
+  }
+  async function loadBoard(){
+    var state=document.getElementById("state");
+    state.style.display="block"; state.textContent="جارٍ تحميل الحالات من السحابة…";
+    document.getElementById("board").style.display="none";
+    if(!window.CRCloud){ state.textContent="خطأ: لم يُحمّل ملف cash-riyada-cloud.js"; return; }
+    var list=await window.CRCloud.listClients();
+    if(list===null){
+      document.getElementById("cfg-warn").style.display="block";
+      state.textContent="تعذّر الاتصال بالسحابة. تأكد من إعدادات Firebase."; return;
+    }
+    document.getElementById("cfg-warn").style.display="none"; render(list);
+  }
+  window.addEventListener("DOMContentLoaded", function(){ setTimeout(loadBoard,300); });
+</script>
+</body>
+</html>
