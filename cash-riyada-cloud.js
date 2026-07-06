@@ -33,13 +33,18 @@
     appId: "1:1036435550825:web:ce575879e7b7e96612e8f8",
   };
 
+  /* ===== Google Drive (save PDF) =====
+     After deploying the Apps Script Web App (see README / google-drive-apps-script.gs),
+     paste its /exec URL between the quotes below. Leave empty to disable the Drive button. */
+  window.CR_DRIVE_ENDPOINT = "https://script.google.com/macros/s/AKfycbzXV0M1OOYThVEtxlBvJNzOHsC9uOXFJ9mb_wadLxUnLnGA4EcCzxKGIsjDykCon-Js/exec";
+
   // ---- Pipeline status model (client status columns) ----
   var STATUS = [
-    { key: "new",      label: "جديد",           color: "#3EADAD" },
-    { key: "session1", label: "الجلسة الأولى",   color: "#C98A2B" },
-    { key: "analysis", label: "التحليل المالي",  color: "#6F2440" },
-    { key: "plan",     label: "خطة العمل",       color: "#2B898C" },
-    { key: "done",     label: "مكتمل",           color: "#27ae60" },
+    { key: "new",        label: "جديد",           color: "#3EADAD" },
+    { key: "first",      label: "الجلسة الأولى",   color: "#C98A2B" },
+    { key: "second",     label: "الجلسة الثانية",  color: "#6F2440" },
+    { key: "done",       label: "مكتمل",           color: "#27ae60" },
+    { key: "inprogress", label: "تحت التنفيذ",     color: "#2B898C" },
   ];
   window.CR_STATUS = STATUS;
   var STATUS_KEYS = STATUS.map(function (s) { return s.key; });

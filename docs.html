@@ -49,6 +49,8 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 /* TABS */
 .tabs-wrap{background:#fff;border-bottom:2px solid #e0e3ef;overflow-x:auto;white-space:nowrap;padding:0 1rem}
+.tab-group{display:inline-flex;align-items:center;gap:6px;padding:.5rem .8rem;margin:.35rem 4px .35rem 6px;font-size:11px;font-weight:800;color:#fff;background:#2E1748;border-radius:20px;vertical-align:middle;cursor:default}
+.tab-group::before{content:"";width:8px;height:8px;border-radius:3px;background:#3EADAD;display:inline-block}
 .tab{display:inline-block;padding:.7rem 1rem;font-size:12px;font-weight:700;color:#888;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;user-select:none}
 .tab.active{color:#2B898C;border-bottom-color:#2B898C}
 .tab:hover{color:#2B898C}
@@ -197,7 +199,6 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
   <div style="font-size:11px;font-weight:700;color:#2B898C;white-space:nowrap">📁 العميل الحالي:</div>
   <div id="current-client-name" style="font-size:12px;font-weight:700;color:#2B898C;background:#eef6f7;border-radius:20px;padding:3px 12px;min-width:100px">— جديد —</div>
   <div style="display:flex;gap:6px;margin-right:auto;flex-wrap:wrap">
-    <button onclick="saveCurrentClient()" style="background:#2B898C;color:#fff;border:none;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">💾 حفظ</button>
     <button onclick="showClientsList()" style="background:#eef6f7;color:#2B898C;border:1.5px solid #2B898C;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">📂 العملاء (<span id="clients-count">0</span>)</button>
     <button onclick="newClient()" style="background:#eef6f7;color:#27ae60;border:1.5px solid #27ae60;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">➕ عميل جديد</button>
   </div>
@@ -217,8 +218,10 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 <div id="drawer-overlay" onclick="closeDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:8999"></div>
 
 <div class="tabs-wrap">
+  <div class="tab-group">الجلسة الأولى</div>
   <div class="tab active" onclick="goTab('client')">بيانات العميل</div>
   <div class="tab" onclick="goTab('diag')">التشخيص</div>
+  <div class="tab-group">الجلسة الثانية</div>
   <div class="tab" onclick="goTab('fin')">التحليل المالي</div>
   <div class="tab" onclick="goTab('cash')">Cash Calendar</div>
   <div class="tab" onclick="goTab('be')">Breakeven & Sales Target</div>
@@ -715,6 +718,7 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
   <div class="btn-row">
     <button class="btn" onclick="goTab('vendors')">→ رجوع</button>
     <button class="btn btn-p" onclick="window.print()">🖨 طباعة</button>
+    <button class="btn" id="cr-drive-btn" onclick="crSaveToDrive()" style="background:#2B898C;color:#fff;border-color:#2B898C">📥 حفظ PDF في Google Drive</button>
     <button class="btn" onclick="buildSummary()">🔄 تحديث الملخص</button>
   </div>
 </div>
@@ -1944,5 +1948,58 @@ function renderDrawer() {
 
 <!-- Cash Riyada cloud + pipeline layer (added, does not alter report logic) -->
 <script src="cash-riyada-cloud.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js"></script>
+<script>
+// ===== Save report PDF to Google Drive (via Apps Script Web App) =====
+function crBlobToBase64(blob){
+  return new Promise(function(res,rej){
+    var r=new FileReader();
+    r.onloadend=function(){ res(String(r.result).split(',')[1]); };
+    r.onerror=rej; r.readAsDataURL(blob);
+  });
+}
+function crDriveDone(btn,orig,url){
+  btn.disabled=false; btn.textContent=orig;
+  if(url){ if(confirm('✅ تم حفظ التقرير في Google Drive.\nفتح الملف الآن؟')) window.open(url,'_blank'); }
+  else { alert('✅ تم إرسال التقرير إلى Google Drive (مجلد "Cash Riyada Reports").'); }
+}
+async function crSaveToDrive(){
+  var btn=document.getElementById('cr-drive-btn');
+  var endpoint=((window.CR_DRIVE_ENDPOINT)||'').trim();
+  if(!endpoint){
+    alert('لم يُضبط رابط Google Drive بعد.\nافتح ملف cash-riyada-cloud.js وألصق رابط الـ Web App في CR_DRIVE_ENDPOINT (راجع README).');
+    return;
+  }
+  if(typeof html2pdf==='undefined'){ alert('تعذّر تحميل مكتبة PDF — تأكد من الاتصال بالإنترنت.'); return; }
+  var orig=btn.textContent; btn.disabled=true; btn.textContent='⏳ جارٍ تجهيز الـ PDF…';
+  var st=document.createElement('style'); st.id='cr-pdf-style';
+  st.textContent='.cr-pdf .sec{display:block!important}.cr-pdf .btn-row{display:none!important}';
+  try{
+    document.head.appendChild(st); document.body.classList.add('cr-pdf');
+    var nm=(document.getElementById('c-name')||{}).value||'عميل';
+    var dt=(document.getElementById('c-date')||{}).value||new Date().toISOString().slice(0,10);
+    var filename=('Cash Riyada - '+nm+' - '+dt+'.pdf').replace(/[\\/:*?"<>|]/g,'-');
+    var blob=await html2pdf().set({
+      margin:[8,8,10,8], filename:filename,
+      image:{type:'jpeg',quality:0.95},
+      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['avoid-all','css']}
+    }).from(document.querySelector('.main')).outputPdf('blob');
+    document.body.classList.remove('cr-pdf'); st.remove();
+    btn.textContent='☁ جارٍ الرفع إلى Drive…';
+    var b64=await crBlobToBase64(blob);
+    // text/plain simple request => no CORS preflight; file is saved even if the response is blocked by CORS
+    try{
+      var res=await fetch(endpoint,{method:'POST',body:JSON.stringify({filename:filename,pdfBase64:b64})});
+      var out=await res.json();
+      if(out&&out.ok){ crDriveDone(btn,orig,out.url); } else { throw new Error((out&&out.error)||'unknown'); }
+    }catch(e){ crDriveDone(btn,orig,null); } // saved, but link unreadable cross-origin
+  }catch(err){
+    document.body.classList.remove('cr-pdf'); var s=document.getElementById('cr-pdf-style'); if(s)s.remove();
+    btn.disabled=false; btn.textContent=orig; alert('تعذّر إنشاء/رفع الـ PDF: '+err);
+  }
+}
+</script>
 </body>
 </html>
