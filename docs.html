@@ -1979,10 +1979,11 @@ async function crSaveToDrive(){
     var nm=(document.getElementById('c-name')||{}).value||'عميل';
     var dt=(document.getElementById('c-date')||{}).value||new Date().toISOString().slice(0,10);
     var filename=('Cash Riyada - '+nm+' - '+dt+'.pdf').replace(/[\\/:*?"<>|]/g,'-');
+    if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
     var blob=await html2pdf().set({
       margin:[8,8,10,8], filename:filename,
       image:{type:'jpeg',quality:0.95},
-      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0},
+      html2canvas:{scale:2,useCORS:true,foreignObjectRendering:true,backgroundColor:'#ffffff',scrollY:0},
       jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
       pagebreak:{mode:['avoid-all','css']}
     }).from(document.querySelector('.main')).outputPdf('blob');
