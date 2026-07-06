@@ -1,19 +1,24 @@
 /**
  * Cash Riyada — Save consultation PDF to Google Drive
- * Deploy this as a Web App (see README). It receives a base64 PDF from the
- * report's "حفظ PDF في Google Drive" button and stores it in a Drive folder.
+ * Saves the report PDF into the folder / Shared Drive whose ID is set below.
+ * After editing, you MUST redeploy a NEW VERSION (see README) for changes to take effect.
  */
-var FOLDER_NAME = 'Cash Riyada Reports'; // change if you want another folder
+var FOLDER_ID = '0APoFmO6ne3mMUk9PVA';  // target folder OR Shared Drive ID
+var SUBFOLDER = 'Cash Riyada Reports';  // set to '' to save directly inside FOLDER_ID
 
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents);
+    var data  = JSON.parse(e.postData.contents);
     var bytes = Utilities.base64Decode(data.pdfBase64);
     var blob  = Utilities.newBlob(bytes, 'application/pdf', data.filename || 'Cash Riyada Report.pdf');
 
-    var it = DriveApp.getFoldersByName(FOLDER_NAME);
-    var folder = it.hasNext() ? it.next() : DriveApp.createFolder(FOLDER_NAME);
-    var file = folder.createFile(blob);
+    var parent = DriveApp.getFolderById(FOLDER_ID);
+    var target = parent;
+    if (SUBFOLDER) {
+      var it = parent.getFoldersByName(SUBFOLDER);
+      target = it.hasNext() ? it.next() : parent.createFolder(SUBFOLDER);
+    }
+    var file = target.createFile(blob);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true, url: file.getUrl(), id: file.getId() }))
@@ -25,7 +30,7 @@ function doPost(e) {
   }
 }
 
-// Lets you open the /exec URL in a browser to confirm it's deployed.
+// Open the /exec URL in a browser to confirm the Web App is live.
 function doGet() {
   return ContentService.createTextOutput('Cash Riyada Drive endpoint is running.');
 }
