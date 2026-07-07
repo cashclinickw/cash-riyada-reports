@@ -1980,13 +1980,15 @@ async function crSaveToDrive(){
     var dt=(document.getElementById('c-date')||{}).value||new Date().toISOString().slice(0,10);
     var filename=('Cash Riyada - '+nm+' - '+dt+'.pdf').replace(/[\\/:*?"<>|]/g,'-');
     if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
+    var mainEl=document.querySelector('.main');
+    var CRW=Math.round(Math.max(mainEl.scrollWidth, mainEl.getBoundingClientRect().width, 794));
     var blob=await html2pdf().set({
       margin:[8,8,10,8], filename:filename,
       image:{type:'jpeg',quality:0.95},
-      html2canvas:{scale:2,useCORS:true,foreignObjectRendering:true,backgroundColor:'#ffffff',scrollY:0},
+      html2canvas:{scale:2,useCORS:true,foreignObjectRendering:true,backgroundColor:'#ffffff',scrollY:0,windowWidth:CRW,width:CRW,onclone:function(cd){var m=cd.querySelector('.main');if(m){m.style.width=CRW+'px';m.style.maxWidth='none';m.style.margin='0';}if(cd.body){cd.body.style.width=CRW+'px';cd.body.style.margin='0';}}},
       jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
       pagebreak:{mode:['avoid-all','css']}
-    }).from(document.querySelector('.main')).outputPdf('blob');
+    }).from(mainEl).outputPdf('blob');
     document.body.classList.remove('cr-pdf'); st.remove();
     btn.textContent='☁ جارٍ الرفع إلى Drive…';
     var b64=await crBlobToBase64(blob);
