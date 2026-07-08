@@ -36,10 +36,10 @@
 <title>وثائق الاستشارة | Cash Riyada</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#eef6f7;direction:rtl;min-height:100vh}
+body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#f3f0f8;direction:rtl;min-height:100vh}
 
 /* HEADER */
-.hdr{background:#2B898C;padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.hdr{background:#2f1748;border-bottom:3px solid #d5a347;padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .hdr-left{display:flex;align-items:center;gap:14px}
 .hdr-left img{height:42px;width:auto}
 .hdr-div{width:1.5px;height:38px;background:rgba(255,255,255,.3)}
@@ -49,11 +49,11 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 /* TABS */
 .tabs-wrap{background:#fff;border-bottom:2px solid #e0e3ef;overflow-x:auto;white-space:nowrap;padding:0 1rem}
-.tab-group{display:inline-flex;align-items:center;gap:6px;padding:.5rem .8rem;margin:.35rem 4px .35rem 6px;font-size:11px;font-weight:800;color:#fff;background:#2E1748;border-radius:20px;vertical-align:middle;cursor:default}
-.tab-group::before{content:"";width:8px;height:8px;border-radius:3px;background:#3EADAD;display:inline-block}
+.tab-group{display:inline-flex;align-items:center;gap:6px;padding:.5rem .8rem;margin:.35rem 4px .35rem 6px;font-size:11px;font-weight:800;color:#fff;background:#2f1748;border-radius:20px;vertical-align:middle;cursor:default}
+.tab-group::before{content:"";width:8px;height:8px;border-radius:3px;background:#2a898c;display:inline-block}
 .tab{display:inline-block;padding:.7rem 1rem;font-size:12px;font-weight:700;color:#888;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;user-select:none}
-.tab.active{color:#2B898C;border-bottom-color:#2B898C}
-.tab:hover{color:#2B898C}
+.tab.active{color:#2f1748;border-bottom-color:#2f1748}
+.tab:hover{color:#2f1748}
 
 /* MAIN */
 .main{max-width:1280px;margin:0 auto;padding:1.5rem 1rem}
@@ -63,7 +63,7 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 /* CARD */
 .card{background:#fff;border-radius:14px;margin-bottom:1.25rem;box-shadow:0 2px 10px rgba(0,0,0,.06);overflow:hidden}
-.card-hd{background:linear-gradient(135deg,#2B898C,#3EADAD);padding:.8rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.card-hd{background:linear-gradient(135deg,#2f1748,#614588);padding:.8rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
 .card-hd h3{font-size:14px;font-weight:700;color:#fff;font-family:'Kufam','Montserrat',sans-serif}
 .card-hd span{font-size:10px;color:rgba(255,255,255,.65)}
 .card-body{padding:1.25rem}
@@ -72,57 +72,57 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.25rem}
 .metric{background:#fff;border-radius:12px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07)}
 .metric-lbl{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.metric-val{font-size:22px;font-weight:800;color:#2B898C}
-.metric-val.pos{color:#27ae60}.metric-val.neg{color:#c0392b}.metric-val.warn{color:#e67e22}
+.metric-val{font-size:22px;font-weight:800;color:#2f1748}
+.metric-val.pos{color:#2a898c}.metric-val.neg{color:#962d38}.metric-val.warn{color:#d5a347}
 
 /* FORM */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .full{grid-column:1/-1}
 .fld{display:flex;flex-direction:column;gap:4px}
-.fld label{font-size:11px;font-weight:700;color:#2B898C;text-transform:uppercase;letter-spacing:.4px}
-.fld input,.fld select,.fld textarea{background:#f2fafa;border:1px solid #e0e3ef;border-radius:8px;padding:8px 12px;font-size:13px;font-family:inherit;color:#222;direction:rtl;width:100%}
-.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:#2B898C}
+.fld label{font-size:11px;font-weight:700;color:#2f1748;text-transform:uppercase;letter-spacing:.4px}
+.fld input,.fld select,.fld textarea{background:#f3f0f8;border:1px solid #e0e3ef;border-radius:8px;padding:8px 12px;font-size:13px;font-family:inherit;color:#222;direction:rtl;width:100%}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:#2f1748}
 .fld textarea{resize:vertical;min-height:70px;line-height:1.6}
 
 /* TABLE */
 .tbl-wrap{overflow-x:auto}
 .tbl{width:100%;border-collapse:collapse;font-size:12px}
-.tbl th{background:#eef6f7;padding:8px 10px;font-size:11px;font-weight:700;color:#2B898C;text-align:center;border-bottom:2px solid #2B898C;white-space:nowrap}
+.tbl th{background:#f3f0f8;padding:8px 10px;font-size:11px;font-weight:700;color:#2f1748;text-align:center;border-bottom:2px solid #d5a347;white-space:nowrap}
 .tbl th:first-child{text-align:right}
 .tbl td{padding:6px 8px;border-bottom:1px solid #f0f0f0;text-align:center;vertical-align:middle}
 .tbl td:first-child{text-align:right}
-.tbl tr:hover td{background:#f6fbfb}
+.tbl tr:hover td{background:#f6f4fb}
 .fin-inp{width:100%;background:transparent;border:1px solid #e0e3ef;border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;direction:ltr;text-align:left;color:#222}
-.fin-inp:focus{outline:none;border-color:#2B898C;background:#f2fafa}
+.fin-inp:focus{outline:none;border-color:#2f1748;background:#f3f0f8}
 .fin-inp.rtl{direction:rtl;text-align:right}
-.tbl-footer td{background:#eaf5f6;font-weight:700;color:#2B898C;font-size:12px}
+.tbl-footer td{background:#f3f0f8;font-weight:700;color:#2f1748;font-size:12px}
 
 /* BUTTONS */
 .btn-row{display:flex;gap:10px;margin-top:1.25rem}
-.btn{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;border:2px solid #2B898C;color:#2B898C;background:#fff;transition:all .2s}
-.btn:hover{background:#2B898C;color:#fff}
-.btn-p{background:#2B898C;color:#fff}
-.btn-p:hover{background:#3EADAD}
-.add-btn{width:100%;padding:8px;background:transparent;border:1.5px dashed #c2ddda;border-radius:8px;color:#888;font-size:12px;font-weight:600;cursor:pointer;margin-top:8px;font-family:inherit;transition:all .2s}
-.add-btn:hover{border-color:#2B898C;color:#2B898C}
+.btn{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;border:2px solid #2f1748;color:#2f1748;background:#fff;transition:all .2s}
+.btn:hover{background:#2f1748;color:#fff}
+.btn-p{background:#2f1748;color:#fff}
+.btn-p:hover{background:#2a898c}
+.add-btn{width:100%;padding:8px;background:transparent;border:1.5px dashed #d2d3e1;border-radius:8px;color:#888;font-size:12px;font-weight:600;cursor:pointer;margin-top:8px;font-family:inherit;transition:all .2s}
+.add-btn:hover{border-color:#2f1748;color:#2f1748}
 .del-btn{background:none;border:none;color:#ccc;font-size:14px;cursor:pointer;padding:2px 6px;line-height:1}
-.del-btn:hover{color:#c0392b}
+.del-btn:hover{color:#962d38}
 
 /* MISC */
-.hint-box{background:#eaf5f6;border-radius:10px;padding:1rem;margin-top:1rem;font-size:12px;color:#555;line-height:1.9}
-.hint-box b{color:#2B898C}
+.hint-box{background:#f3f0f8;border-radius:10px;padding:1rem;margin-top:1rem;font-size:12px;color:#555;line-height:1.9}
+.hint-box b{color:#2f1748}
 .section-divider{height:1px;background:#e0e3ef;margin:1.25rem 0}
 
 /* SWOT */
 .swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .swot-card{border-radius:10px;padding:1rem}
-.swot-card.s{background:#e8f5e9;border:1.5px solid #a5d6a7}
-.swot-card.w{background:#fce4ec;border:1.5px solid #f48fb1}
-.swot-card.o{background:#e3f2fd;border:1.5px solid #90caf9}
-.swot-card.t{background:#fff3e0;border:1.5px solid #ffcc80}
+.swot-card.s{background:#d9ecec;border:1.5px solid #bcdcdc}
+.swot-card.w{background:#f6e3e5;border:1.5px solid #c98a96}
+.swot-card.o{background:#d6ecf7;border:1.5px solid #a9c3de}
+.swot-card.t{background:#f7ecd3;border:1.5px solid #e6c477}
 .swot-card label{font-size:11px;font-weight:700;letter-spacing:.5px;display:block;margin-bottom:6px}
-.swot-card.s label{color:#2e7d32}.swot-card.w label{color:#c62828}.swot-card.o label{color:#1565c0}.swot-card.t label{color:#e65100}
+.swot-card.s label{color:#1f696b}.swot-card.w label{color:#962d38}.swot-card.o label{color:#2d4a6b}.swot-card.t label{color:#8a6627}
 .swot-card textarea{background:transparent;border:none;width:100%;font-size:13px;font-family:inherit;resize:vertical;min-height:80px;color:#333;line-height:1.7}
 .swot-card textarea:focus{outline:none}
 
@@ -130,8 +130,8 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 #org-chart{padding:1rem;min-height:120px;text-align:center}
 
 /* SUMMARY */
-.summary-block{background:#f2fafa;border-radius:10px;padding:1rem;margin-bottom:1rem;border-right:4px solid #2B898C}
-.summary-block h4{font-size:13px;font-weight:700;color:#2B898C;margin-bottom:.5rem}
+.summary-block{background:#f3f0f8;border-radius:10px;padding:1rem;margin-bottom:1rem;border-right:4px solid #2f1748}
+.summary-block h4{font-size:13px;font-weight:700;color:#2f1748;margin-bottom:.5rem}
 .summary-block p{font-size:12px;color:#555;line-height:1.8}
 
 /* PRINT */
@@ -196,17 +196,17 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 <!-- CLIENT MANAGER BAR -->
 <div id="client-bar" style="background:#fff;border-bottom:1px solid #e0e3ef;padding:.5rem 1.5rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-  <div style="font-size:11px;font-weight:700;color:#2B898C;white-space:nowrap">📁 العميل الحالي:</div>
-  <div id="current-client-name" style="font-size:12px;font-weight:700;color:#2B898C;background:#eef6f7;border-radius:20px;padding:3px 12px;min-width:100px">— جديد —</div>
+  <div style="font-size:11px;font-weight:700;color:#2f1748;white-space:nowrap">📁 العميل الحالي:</div>
+  <div id="current-client-name" style="font-size:12px;font-weight:700;color:#2f1748;background:#f3f0f8;border-radius:20px;padding:3px 12px;min-width:100px">— جديد —</div>
   <div style="display:flex;gap:6px;margin-right:auto;flex-wrap:wrap">
-    <button onclick="showClientsList()" style="background:#eef6f7;color:#2B898C;border:1.5px solid #2B898C;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">📂 العملاء (<span id="clients-count">0</span>)</button>
-    <button onclick="newClient()" style="background:#eef6f7;color:#27ae60;border:1.5px solid #27ae60;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">➕ عميل جديد</button>
+    <button onclick="showClientsList()" style="background:#f3f0f8;color:#2f1748;border:1.5px solid #2f1748;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">📂 العملاء (<span id="clients-count">0</span>)</button>
+    <button onclick="newClient()" style="background:#f3f0f8;color:#2a898c;border:1.5px solid #2a898c;border-radius:8px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">➕ عميل جديد</button>
   </div>
 </div>
 
 <!-- CLIENTS DRAWER -->
 <div id="clients-drawer" style="display:none;position:fixed;top:0;right:0;width:360px;height:100vh;background:#fff;box-shadow:-4px 0 20px rgba(0,0,0,.15);z-index:9000;flex-direction:column;direction:rtl">
-  <div style="background:#2B898C;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between">
+  <div style="background:#2f1748;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between">
     <div style="font-size:14px;font-weight:700;color:#fff">📂 العملاء المحفوظون</div>
     <button onclick="closeDrawer()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px">✕</button>
   </div>
@@ -311,7 +311,7 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
             <th style="min-width:150px">المصدر</th>
             <th>يناير</th><th>فبراير</th><th>مارس</th><th>أبريل</th><th>مايو</th><th>يونيو</th>
             <th>يوليو</th><th>أغسطس</th><th>سبتمبر</th><th>أكتوبر</th><th>نوفمبر</th><th>ديسمبر</th>
-            <th style="background:#2B898C;color:#fff">المجموع</th><th style="width:30px"></th>
+            <th style="background:#2f1748;color:#fff">المجموع</th><th style="width:30px"></th>
           </tr></thead>
           <tbody id="rev-body"></tbody>
           <tfoot><tr class="tbl-footer">
@@ -335,10 +335,10 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
             <th style="min-width:150px">البند</th>
             <th>يناير</th><th>فبراير</th><th>مارس</th><th>أبريل</th><th>مايو</th><th>يونيو</th>
             <th>يوليو</th><th>أغسطس</th><th>سبتمبر</th><th>أكتوبر</th><th>نوفمبر</th><th>ديسمبر</th>
-            <th style="background:#c0392b;color:#fff">الإجمالي</th><th style="width:30px"></th>
+            <th style="background:#962d38;color:#fff">الإجمالي</th><th style="width:30px"></th>
           </tr></thead>
           <tbody id="fx-body"></tbody>
-          <tfoot><tr class="tbl-footer" style="background:#fef0f0">
+          <tfoot><tr class="tbl-footer" style="background:#f6e3e5">
             <td>الإجمالي/شهر</td>
             <td id="ft1">0</td><td id="ft2">0</td><td id="ft3">0</td><td id="ft4">0</td><td id="ft5">0</td><td id="ft6">0</td>
             <td id="ft7">0</td><td id="ft8">0</td><td id="ft9">0</td><td id="ft10">0</td><td id="ft11">0</td><td id="ft12">0</td>
@@ -372,31 +372,31 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 <div class="sec" id="sec-cash">
   <div class="card">
-    <div class="card-hd" style="background:linear-gradient(135deg,#1a5276,#2471a3)">
+    <div class="card-hd" style="background:linear-gradient(135deg,#2d4a6b,#2d4a6b)">
       <h3>📅 Cash Calendar — رزنامة الكاش</h3>
       <span>جدولة مدفوعات التكاليف الثابتة على فترات شهرية</span>
     </div>
     <div class="card-body">
 
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;background:#eaf4fb;padding:.85rem 1rem;border-radius:10px;flex-wrap:wrap">
-        <div style="font-size:12px;font-weight:700;color:#1a5276">إجمالي التكاليف الثابتة الشهرية:</div>
-        <div style="font-size:18px;font-weight:800;color:#c0392b" id="cc-total-fixed">0 د.ك</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;background:#dce6f1;padding:.85rem 1rem;border-radius:10px;flex-wrap:wrap">
+        <div style="font-size:12px;font-weight:700;color:#2d4a6b">إجمالي التكاليف الثابتة الشهرية:</div>
+        <div style="font-size:18px;font-weight:800;color:#962d38" id="cc-total-fixed">0 د.ك</div>
         <div style="font-size:11px;color:#888;margin-right:auto">يُسحب تلقائياً من بوابة التحليل المالي</div>
         <button class="btn" style="font-size:11px;padding:6px 14px" onclick="syncCashCalendar()">🔄 تحديث من التحليل المالي</button>
       </div>
 
       <!-- Periods -->
       <div id="cc-periods"></div>
-      <button class="add-btn" style="border-color:#2471a3;color:#2471a3" onclick="addCCPeriod()">+ إضافة فترة دفع</button>
+      <button class="add-btn" style="border-color:#2d4a6b;color:#2d4a6b" onclick="addCCPeriod()">+ إضافة فترة دفع</button>
 
       <!-- Summary -->
-      <div style="margin-top:1.5rem;background:#eaf4fb;border-radius:12px;padding:1rem;border:1px solid #aed6f1">
-        <div style="font-size:13px;font-weight:700;color:#1a5276;margin-bottom:10px">ملخص رزنامة الكاش</div>
+      <div style="margin-top:1.5rem;background:#dce6f1;border-radius:12px;padding:1rem;border:1px solid #dce6f1">
+        <div style="font-size:13px;font-weight:700;color:#2d4a6b;margin-bottom:10px">ملخص رزنامة الكاش</div>
         <div style="display:flex;flex-wrap:wrap;gap:10px" id="cc-summary-boxes"></div>
         <div style="margin-top:12px;font-size:12px;color:#888">
-          المجموع المجدول: <b id="cc-scheduled-total" style="color:#27ae60">0 د.ك</b>
+          المجموع المجدول: <b id="cc-scheduled-total" style="color:#2a898c">0 د.ك</b>
           &nbsp;|&nbsp;
-          الفرق عن الإجمالي: <b id="cc-diff" style="color:#e67e22">0 د.ك</b>
+          الفرق عن الإجمالي: <b id="cc-diff" style="color:#d5a347">0 د.ك</b>
         </div>
       </div>
     </div>
@@ -430,8 +430,8 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
             <th style="min-width:100px">التكلفة المتغيرة</th>
             <th style="min-width:90px">هامش الربح</th>
             <th style="min-width:85px">نسبة الهامش</th>
-            <th style="min-width:95px;color:#c0392b">وحدات BE</th>
-            <th style="min-width:110px;background:#fff8e1;color:#e65100">نسبة المبيعات %</th>
+            <th style="min-width:95px;color:#962d38">وحدات BE</th>
+            <th style="min-width:110px;background:#fbf4e2;color:#8a6627">نسبة المبيعات %</th>
             <th style="width:32px"></th>
           </tr></thead>
           <tbody id="be-body"></tbody>
@@ -448,8 +448,8 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
   </div>
 
   <!-- SALES TARGET -->
-  <div class="card" style="border:2px solid #27ae60">
-    <div class="card-hd" style="background:linear-gradient(135deg,#1e8449,#27ae60)">
+  <div class="card" style="border:2px solid #2a898c">
+    <div class="card-hd" style="background:linear-gradient(135deg,#1f696b,#2a898c)">
       <h3>🎯 جدول أهداف المبيعات — Sales Target</h3>
       <span>الأسماء والأسعار تُنسخ تلقائياً من جدول Breakeven</span>
     </div>
@@ -461,16 +461,16 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
             <th>سعر البيع</th>
             <th>التكلفة المتغيرة</th>
             <th>هامش الربح</th>
-            <th style="background:#f0fdf4;color:#27ae60">الوحدات المستهدفة</th>
-            <th style="background:#ecf7f8;color:#2B898C">اسم الموظف المسؤول</th>
-            <th style="background:#f0fdf4;color:#27ae60">إجمالي المبيعات المستهدفة</th>
+            <th style="background:#d9ecec;color:#2a898c">الوحدات المستهدفة</th>
+            <th style="background:#f3f0f8;color:#2f1748">اسم الموظف المسؤول</th>
+            <th style="background:#d9ecec;color:#2a898c">إجمالي المبيعات المستهدفة</th>
             <th style="width:32px"></th>
           </tr></thead>
           <tbody id="st-body"></tbody>
         </table>
       </div>
       <div style="display:flex;gap:8px;margin-top:10px">
-        <button class="add-btn" style="border-color:#27ae60;color:#27ae60" onclick="syncSalesTarget()">🔄 تحديث من Breakeven</button>
+        <button class="add-btn" style="border-color:#2a898c;color:#2a898c" onclick="syncSalesTarget()">🔄 تحديث من Breakeven</button>
       </div>
 
       
@@ -478,28 +478,28 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 
 <!-- SUMMARY -->
-      <div style="background:#f0fdf4;border-radius:10px;padding:1rem;margin-top:1.25rem;border:1px solid #c3e6cb">
-        <div style="font-size:13px;font-weight:700;color:#1e8449;margin-bottom:10px">ملخص أهداف المبيعات الإجمالية</div>
+      <div style="background:#d9ecec;border-radius:10px;padding:1rem;margin-top:1.25rem;border:1px solid #bcdcdc">
+        <div style="font-size:13px;font-weight:700;color:#1f696b;margin-bottom:10px">ملخص أهداف المبيعات الإجمالية</div>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px" id="st-summary">
-          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #c3e6cb">
+          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #bcdcdc">
             <div style="font-size:10px;color:#888;margin-bottom:4px">عدد الخدمات/المنتجات</div>
-            <div style="font-size:18px;font-weight:800;color:#2B898C" id="st-count">0</div>
+            <div style="font-size:18px;font-weight:800;color:#2f1748" id="st-count">0</div>
           </div>
-          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #c3e6cb">
+          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #bcdcdc">
             <div style="font-size:10px;color:#888;margin-bottom:4px">إجمالي الوحدات المستهدفة</div>
-            <div style="font-size:18px;font-weight:800;color:#27ae60" id="st-units">0</div>
+            <div style="font-size:18px;font-weight:800;color:#2a898c" id="st-units">0</div>
           </div>
-          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #c3e6cb">
+          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #bcdcdc">
             <div style="font-size:10px;color:#888;margin-bottom:4px">إجمالي التكاليف المتغيرة</div>
-            <div style="font-size:18px;font-weight:800;color:#c0392b" id="st-vcost">0 د.ك</div>
+            <div style="font-size:18px;font-weight:800;color:#962d38" id="st-vcost">0 د.ك</div>
           </div>
-          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #c3e6cb">
+          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1px solid #bcdcdc">
             <div style="font-size:10px;color:#888;margin-bottom:4px">إجمالي هامش الربح</div>
-            <div style="font-size:18px;font-weight:800;color:#2B898C" id="st-margin">0 د.ك</div>
+            <div style="font-size:18px;font-weight:800;color:#2f1748" id="st-margin">0 د.ك</div>
           </div>
-          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1.5px solid #27ae60">
-            <div style="font-size:10px;color:#27ae60;font-weight:700;margin-bottom:4px">إجمالي هدف المبيعات</div>
-            <div style="font-size:18px;font-weight:800;color:#27ae60" id="st-total-rev">0 د.ك</div>
+          <div style="text-align:center;background:#fff;border-radius:8px;padding:10px;border:1.5px solid #2a898c">
+            <div style="font-size:10px;color:#2a898c;font-weight:700;margin-bottom:4px">إجمالي هدف المبيعات</div>
+            <div style="font-size:18px;font-weight:800;color:#2a898c" id="st-total-rev">0 د.ك</div>
           </div>
         </div>
       </div>
@@ -611,7 +611,7 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
   <div class="card">
     <div class="card-hd"><h3>خطة العمل التنفيذية</h3><span>الخطوات والمسؤوليات</span></div>
     <div class="card-body">
-      <div style="display:grid;grid-template-columns:auto 1fr 150px 140px 90px auto;gap:8px;padding:0 0 8px;border-bottom:2px solid #e0e3ef;font-size:11px;font-weight:700;color:#2B898C">
+      <div style="display:grid;grid-template-columns:auto 1fr 150px 140px 90px auto;gap:8px;padding:0 0 8px;border-bottom:2px solid #e0e3ef;font-size:11px;font-weight:700;color:#2f1748">
         <div style="width:32px">#</div><div>الخطوة / المهمة</div><div>المسؤول</div><div>الموعد النهائي</div><div>الأولوية</div><div style="width:30px"></div>
       </div>
       <div id="plan-body"></div>
@@ -645,17 +645,17 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
 
 <div class="sec" id="sec-survey">
   <div class="card">
-    <div class="card-hd" style="background:linear-gradient(135deg,#6a1b9a,#8e24aa)">
+    <div class="card-hd" style="background:linear-gradient(135deg,#614588,#614588)">
       <h3>&#x1F4CA; ردود الاستبيان</h3>
       <span>استيراد وتحليل ردود العملاء قبل الجلسة</span>
     </div>
     <div class="card-body">
-      <div style="background:#f3e5f5;border-radius:10px;padding:1rem;margin-bottom:1.25rem;border:1px solid #ce93d8">
-        <div style="font-size:13px;font-weight:700;color:#6a1b9a;margin-bottom:6px">&#x1F4E5; الصق رد العميل من الاستبيان</div>
+      <div style="background:#f3f0f8;border-radius:10px;padding:1rem;margin-bottom:1.25rem;border:1px solid #d2d3e1">
+        <div style="font-size:13px;font-weight:700;color:#614588;margin-bottom:6px">&#x1F4E5; الصق رد العميل من الاستبيان</div>
         <div style="font-size:11px;color:#777;margin-bottom:8px">يمكنك لصق أي نص (من واتساب أو البريد) وسيحاول النظام استخراج البيانات تلقائياً</div>
-        <textarea id="survey-raw-input" placeholder="الصق نص الرد هنا..." style="width:100%;min-height:80px;padding:8px;border:1px solid #ce93d8;border-radius:8px;font-size:12px;font-family:inherit;resize:vertical;direction:rtl"></textarea>
+        <textarea id="survey-raw-input" placeholder="الصق نص الرد هنا..." style="width:100%;min-height:80px;padding:8px;border:1px solid #d2d3e1;border-radius:8px;font-size:12px;font-family:inherit;resize:vertical;direction:rtl"></textarea>
         <div style="display:flex;gap:8px;margin-top:8px">
-          <button class="btn btn-p" style="background:#6a1b9a;border-color:#6a1b9a;font-size:12px;padding:6px 16px" onclick="parseSurveyInput()">تحليل النص</button>
+          <button class="btn btn-p" style="background:#614588;border-color:#614588;font-size:12px;padding:6px 16px" onclick="parseSurveyInput()">تحليل النص</button>
           <button class="btn" style="font-size:12px;padding:6px 16px" onclick="clearSurvey()">مسح</button>
         </div>
       </div>
@@ -684,10 +684,10 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
       </div>
       <div style="display:flex;gap:8px;margin-top:1rem;margin-bottom:1.25rem;flex-wrap:wrap">
         <button class="btn btn-p" onclick="applySurveyToClient()" style="font-size:12px">نقل البيانات لبوابة العميل</button>
-        <button class="btn" onclick="saveSurveyEntry()" style="font-size:12px;border-color:#6a1b9a;color:#6a1b9a">حفظ في السجل</button>
-        <button class="btn" onclick="exportSurveyLog()" style="font-size:12px;border-color:#2980b9;color:#2980b9">تصدير CSV</button>
+        <button class="btn" onclick="saveSurveyEntry()" style="font-size:12px;border-color:#614588;color:#614588">حفظ في السجل</button>
+        <button class="btn" onclick="exportSurveyLog()" style="font-size:12px;border-color:#2d4a6b;color:#2d4a6b">تصدير CSV</button>
       </div>
-      <div style="font-size:13px;font-weight:700;color:#6a1b9a;margin-bottom:8px">سجل العملاء المحتملين</div>
+      <div style="font-size:13px;font-weight:700;color:#614588;margin-bottom:8px">سجل العملاء المحتملين</div>
       <div class="tbl-wrap">
         <table class="tbl">
           <thead><tr>
@@ -718,7 +718,7 @@ body{font-family:'Kufam','Montserrat','Segoe UI',Arial,sans-serif;background:#ee
   <div class="btn-row">
     <button class="btn" onclick="goTab('vendors')">→ رجوع</button>
     <button class="btn btn-p" onclick="window.print()">🖨 طباعة</button>
-    <button class="btn" id="cr-drive-btn" onclick="crSaveToDrive()" style="background:#2B898C;color:#fff;border-color:#2B898C">📥 حفظ PDF في Google Drive</button>
+    <button class="btn" id="cr-drive-btn" onclick="crSaveToDrive()" style="background:#2f1748;color:#fff;border-color:#2f1748">📥 حفظ PDF في Google Drive</button>
     <button class="btn" onclick="buildSummary()">🔄 تحديث الملخص</button>
   </div>
 </div>
@@ -760,7 +760,7 @@ function addRevRow(){
   var tr=document.createElement('tr'); tr.id=id;
   var mCells='';
   for(var m=1;m<=12;m++) mCells+='<td><input class="fin-inp rev-m'+m+'" type="number" placeholder="0" min="0" oninput="calcFin()" style="width:65px"></td>';
-  tr.innerHTML='<td><input class="fin-inp rtl" placeholder="المصدر" oninput="calcFin()"></td>'+mCells+'<td id="'+id+'-t" style="font-weight:700;color:#2B898C">0</td><td><button class="del-btn" onclick="delRow(\''+id+'\',revRows)">✕</button></td>';
+  tr.innerHTML='<td><input class="fin-inp rtl" placeholder="المصدر" oninput="calcFin()"></td>'+mCells+'<td id="'+id+'-t" style="font-weight:700;color:#2f1748">0</td><td><button class="del-btn" onclick="delRow(\''+id+'\',revRows)">✕</button></td>';
   document.getElementById('rev-body').appendChild(tr);
 }
 
@@ -773,7 +773,7 @@ function addFxRow(){
   var tr=document.createElement('tr'); tr.id=id;
   var mCells='';
   for(var m=1;m<=12;m++) mCells+='<td><input class="fin-inp fx-m'+m+'" type="number" placeholder="0" min="0" oninput="calcFin()" style="width:65px"></td>';
-  tr.innerHTML='<td><input class="fin-inp rtl" placeholder="البند" oninput="calcFin()"></td>'+mCells+'<td id="'+id+'-t" style="font-weight:700;color:#c0392b">0</td><td><button class="del-btn" onclick="delRow(\''+id+'\',fxRows)">✕</button></td>';
+  tr.innerHTML='<td><input class="fin-inp rtl" placeholder="البند" oninput="calcFin()"></td>'+mCells+'<td id="'+id+'-t" style="font-weight:700;color:#962d38">0</td><td><button class="del-btn" onclick="delRow(\''+id+'\',fxRows)">✕</button></td>';
   document.getElementById('fx-body').appendChild(tr);
 }
 
@@ -859,10 +859,10 @@ function addBERow() {
     '<td><input class="fin-inp be-name" style="direction:rtl;text-align:right" placeholder="المنتج / الخدمة" oninput="calcBE();syncST()"></td>' +
     '<td><input class="fin-inp be-price" type="number" min="0" placeholder="0" oninput="calcBE();syncST()" style="width:85px"></td>' +
     '<td><input class="fin-inp be-vcost" type="number" min="0" placeholder="0" oninput="calcBE();syncST()" style="width:85px"></td>' +
-    '<td id="' + id + '-mg" style="font-weight:700;color:#2B898C">—</td>' +
+    '<td id="' + id + '-mg" style="font-weight:700;color:#2f1748">—</td>' +
     '<td id="' + id + '-pct" style="color:#555">—</td>' +
-    '<td id="' + id + '-units" style="font-weight:700;color:#c0392b">—</td>' +
-    '<td style="background:#fff8e1"><input class="fin-inp be-mix" type="number" min="0" max="100" placeholder="0" oninput="calcBE()" style="width:80px;border:1.5px solid #e65100;background:transparent" title="نسبة هذا المنتج من إجمالي مبيعاتك"></td>' +
+    '<td id="' + id + '-units" style="font-weight:700;color:#962d38">—</td>' +
+    '<td style="background:#fbf4e2"><input class="fin-inp be-mix" type="number" min="0" max="100" placeholder="0" oninput="calcBE()" style="width:80px;border:1.5px solid #8a6627;background:transparent" title="نسبة هذا المنتج من إجمالي مبيعاتك"></td>' +
     '<td><button class="del-btn" onclick="delBERow(\'' + id + '\')">✕</button></td>';
   document.getElementById('be-body').appendChild(tr);
   syncST();
@@ -887,7 +887,7 @@ function calcBE() {
     var mg = document.getElementById(id + '-mg');
     var pc = document.getElementById(id + '-pct');
     var un = document.getElementById(id + '-units');
-    if(mg) { mg.textContent = price ? fmtKD(margin) : '—'; mg.style.color = margin > 0 ? '#2B898C' : '#c0392b'; }
+    if(mg) { mg.textContent = price ? fmtKD(margin) : '—'; mg.style.color = margin > 0 ? '#2f1748' : '#962d38'; }
     if(pc) pc.textContent = price ? pct.toFixed(1) + '%' : '—';
     if(un) un.textContent = margin > 0 ? units + ' وحدة' : '—';
     if(margin > 0) products.push({ price: price, margin: margin, pct: pct, mix: mix });
@@ -948,12 +948,12 @@ function syncST(){
     tr.setAttribute('data-bid',p.bid);
     tr.innerHTML=
       '<td style="font-weight:600;color:#333">'+( p.name||'—')+'</td>'+
-      '<td style="color:#2B898C;font-weight:700">'+fmtKD(p.price)+'</td>'+
-      '<td style="color:#c0392b">'+fmtKD(p.vcost)+'</td>'+
-      '<td style="color:#2B898C;font-weight:700">'+fmtKD(margin)+'</td>'+
-      '<td style="background:#f0fdf4"><input class="fin-inp st-qty" type="number" min="0" placeholder="0" value="'+(prev.qty||'')+'" oninput="updateSTSummary()" style="width:85px;border:1.5px solid #27ae60;background:transparent" data-price="'+p.price+'" data-vcost="'+p.vcost+'" data-margin="'+margin+'"></td>'+
-      '<td style="background:#ecf7f8"><input class="fin-inp st-emp rtl" placeholder="اسم الموظف" value="'+(prev.emp||'')+'" style="background:transparent;border:1px solid #c4e4e4;min-width:120px"></td>'+
-      '<td id="strev-'+p.bid+'" style="font-weight:700;color:#27ae60;background:#f0fdf4">—</td>'+
+      '<td style="color:#2f1748;font-weight:700">'+fmtKD(p.price)+'</td>'+
+      '<td style="color:#962d38">'+fmtKD(p.vcost)+'</td>'+
+      '<td style="color:#2f1748;font-weight:700">'+fmtKD(margin)+'</td>'+
+      '<td style="background:#d9ecec"><input class="fin-inp st-qty" type="number" min="0" placeholder="0" value="'+(prev.qty||'')+'" oninput="updateSTSummary()" style="width:85px;border:1.5px solid #2a898c;background:transparent" data-price="'+p.price+'" data-vcost="'+p.vcost+'" data-margin="'+margin+'"></td>'+
+      '<td style="background:#f3f0f8"><input class="fin-inp st-emp rtl" placeholder="اسم الموظف" value="'+(prev.emp||'')+'" style="background:transparent;border:1px solid #d2d3e1;min-width:120px"></td>'+
+      '<td id="strev-'+p.bid+'" style="font-weight:700;color:#2a898c;background:#d9ecec">—</td>'+
       '<td></td>';
     tbody.appendChild(tr);
   });
@@ -994,14 +994,14 @@ function updateSTSummary() {
   var box = document.getElementById('emp-perf-boxes');
   if(box) {
     var html = '';
-    var colors = ['#2B898C','#27ae60','#2980b9','#8e44ad','#e67e22','#c0392b'];
+    var colors = ['#2f1748','#2a898c','#2d4a6b','#614588','#d5a347','#962d38'];
     var ci = 0;
     for(var name in empData) {
       var d = empData[name];
       var c = colors[ci % colors.length]; ci++;
       html += '<div style="background:#fff;border:2px solid '+c+';border-radius:10px;padding:10px 16px;min-width:180px;text-align:right">' +
         '<div style="font-size:11px;font-weight:700;color:'+c+';margin-bottom:6px">'+name+'</div>' +
-        '<div style="font-size:12px;color:#555">الوحدات: <b style="color:#2B898C">'+fmt(d.units)+' وحدة</b></div>' +
+        '<div style="font-size:12px;color:#555">الوحدات: <b style="color:#2f1748">'+fmt(d.units)+' وحدة</b></div>' +
         '<div style="font-size:13px;font-weight:800;color:'+c+';margin-top:4px">'+fmtKD(d.rev)+'</div>' +
       '</div>';
     }
@@ -1039,14 +1039,14 @@ function addBenchRow(){
 // EMPLOYEES + ORG CHART
 // ═══════════════════════════════════════
 var empRows=[];
-var orgColors={ceo:'#2B898C',manager:'#2980b9',staff:'#27ae60',freelance:'#7f8c8d'};
+var orgColors={ceo:'#2f1748',manager:'#2d4a6b',staff:'#2a898c',freelance:'#7f8c8d'};
 var orgLabels={ceo:'مدير عام',manager:'مدير قسم',staff:'موظف',freelance:'فريلانسر'};
 
 function addEmpRow(){
   var n=empRows.length+1;
   var id='e'+Date.now(); empRows.push(id);
   var tr=document.createElement('tr'); tr.id=id;
-  tr.innerHTML='<td style="text-align:center;font-weight:700;color:#2B898C;font-size:12px">'+n+'</td>'+
+  tr.innerHTML='<td style="text-align:center;font-weight:700;color:#2f1748;font-size:12px">'+n+'</td>'+
     '<td><input class="fin-inp rtl emp-name" placeholder="الاسم" oninput="syncOrg()"></td>'+
     '<td><input class="fin-inp rtl emp-title" placeholder="المسمى" oninput="syncOrg()"></td>'+
     '<td><input class="fin-inp rtl" placeholder="الجنسية"></td>'+
@@ -1148,7 +1148,7 @@ function addPlanRow(){
   var div=document.createElement('div');
   div.id=id;
   div.style.cssText='display:grid;grid-template-columns:32px 1fr 150px 140px 90px 30px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0';
-  div.innerHTML='<div style="font-weight:700;color:#2B898C;font-size:12px;text-align:center">'+planCount+'</div>'+
+  div.innerHTML='<div style="font-weight:700;color:#2f1748;font-size:12px;text-align:center">'+planCount+'</div>'+
     '<input class="fin-inp rtl" placeholder="وصف الخطوة / المهمة">'+
     '<input class="fin-inp rtl" placeholder="المسؤول">'+
     '<input class="fin-inp" type="date">'+
@@ -1167,10 +1167,10 @@ function addVendorCard(){
   var id='v'+Date.now();
   var div=document.createElement('div');
   div.id=id;
-  div.style.cssText='background:#f2fafa;border:1px solid #e0e3ef;border-radius:12px;padding:1rem;margin-bottom:10px';
+  div.style.cssText='background:#f3f0f8;border:1px solid #e0e3ef;border-radius:12px;padding:1rem;margin-bottom:10px';
   div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
-    '<span style="font-size:12px;font-weight:700;color:#2B898C">مورد '+vendorCount+'</span>'+
-    '<button class="del-btn" onclick="document.getElementById(\''+id+'\').remove()" style="color:#c0392b">حذف</button>'+
+    '<span style="font-size:12px;font-weight:700;color:#2f1748">مورد '+vendorCount+'</span>'+
+    '<button class="del-btn" onclick="document.getElementById(\''+id+'\').remove()" style="color:#962d38">حذف</button>'+
     '</div>'+
     '<div class="grid3">'+
       '<div class="fld"><label>الاسم</label><input placeholder="اسم المورد"></div>'+
@@ -1196,7 +1196,7 @@ function buildSummary() {
   // ── Client Info ──
   var name=g('c-name'), company=g('c-company'), pkg=g('c-pkg'), sector=g('c-sector');
   if(name||company) {
-    html += '<div style="background:#2B898C;color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem">';
+    html += '<div style="background:#2f1748;color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem">';
     html += '<div style="font-size:16px;font-weight:800;margin-bottom:4px">'+(name||'—')+'</div>';
     if(company) html += '<div style="font-size:12px;opacity:.8">'+company+(sector?' — '+sector:'')+'</div>';
     if(pkg) html += '<div style="font-size:11px;opacity:.7;margin-top:4px">'+pkg+'</div>';
@@ -1209,48 +1209,48 @@ function buildSummary() {
   var hasFinData = revRows.length>0 || fxRows.length>0;
   if(hasFinData) {
     html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">';
-    html += '<div style="background:#f0fdf4;border-radius:8px;padding:.75rem;text-align:center;border:1px solid #bbf7d0"><div style="font-size:10px;color:#888;margin-bottom:4px">الإيرادات</div><div style="font-size:16px;font-weight:800;color:#27ae60">'+rev+'</div></div>';
-    html += '<div style="background:#fef2f2;border-radius:8px;padding:.75rem;text-align:center;border:1px solid #fecaca"><div style="font-size:10px;color:#888;margin-bottom:4px">التكاليف</div><div style="font-size:16px;font-weight:800;color:#c0392b">'+cost+'</div></div>';
-    html += '<div style="background:#ecf7f8;border-radius:8px;padding:.75rem;text-align:center;border:1px solid #c4e4e4"><div style="font-size:10px;color:#888;margin-bottom:4px">صافي الربح</div><div style="font-size:16px;font-weight:800;color:#2B898C">'+prof+'</div></div>';
+    html += '<div style="background:#d9ecec;border-radius:8px;padding:.75rem;text-align:center;border:1px solid #bcdcdc"><div style="font-size:10px;color:#888;margin-bottom:4px">الإيرادات</div><div style="font-size:16px;font-weight:800;color:#2a898c">'+rev+'</div></div>';
+    html += '<div style="background:#f6e3e5;border-radius:8px;padding:.75rem;text-align:center;border:1px solid #e6c3c8"><div style="font-size:10px;color:#888;margin-bottom:4px">التكاليف</div><div style="font-size:16px;font-weight:800;color:#962d38">'+cost+'</div></div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.75rem;text-align:center;border:1px solid #d2d3e1"><div style="font-size:10px;color:#888;margin-bottom:4px">صافي الربح</div><div style="font-size:16px;font-weight:800;color:#2f1748">'+prof+'</div></div>';
     html += '</div>';
   }
 
   // ── Goal ──
   var goal=g('c-goal');
   if(goal) {
-    html += '<div style="background:#fff8e1;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border-right:4px solid #f59e0b">';
-    html += '<div style="font-size:11px;font-weight:700;color:#92400e;margin-bottom:4px">الهدف الرئيسي</div>';
+    html += '<div style="background:#fbf4e2;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border-right:4px solid #d5a347">';
+    html += '<div style="font-size:11px;font-weight:700;color:#8a6627;margin-bottom:4px">الهدف الرئيسي</div>';
     html += '<div style="font-size:12px;color:#555">'+goal+'</div></div>';
   }
 
   // ── Notes ──
   var notes=g('c-notes');
   if(notes) {
-    html += '<div style="background:#f2fafa;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border-right:4px solid #2B898C">';
-    html += '<div style="font-size:11px;font-weight:700;color:#2B898C;margin-bottom:4px">أهم الملاحظات</div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border-right:4px solid #2f1748">';
+    html += '<div style="font-size:11px;font-weight:700;color:#2f1748;margin-bottom:4px">أهم الملاحظات</div>';
     html += '<div style="font-size:12px;color:#555;white-space:pre-line">'+notes+'</div></div>';
   }
 
   // ── Diagnosis ──
   var idea=g('d-idea'), edge=g('d-edge'), verdict=g('d-verdict'), risks=g('d-risks');
   if(idea||edge||verdict) {
-    html += '<div style="background:#f2fafa;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
-    html += '<div style="font-size:12px;font-weight:700;color:#2B898C;margin-bottom:8px">التشخيص</div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
+    html += '<div style="font-size:12px;font-weight:700;color:#2f1748;margin-bottom:8px">التشخيص</div>';
     if(idea) html += '<div style="font-size:11px;margin-bottom:6px"><b>الفكرة:</b> '+idea+'</div>';
     if(edge) html += '<div style="font-size:11px;margin-bottom:6px"><b>الميزة التنافسية:</b> '+edge+'</div>';
     if(risks) html += '<div style="font-size:11px;margin-bottom:6px"><b>المخاطر:</b> '+risks+'</div>';
-    if(verdict) html += '<div style="font-size:11px;background:#fff3cd;border-radius:6px;padding:8px;margin-top:6px"><b>تقييم الاستشاري:</b> '+verdict+'</div>';
+    if(verdict) html += '<div style="font-size:11px;background:#fbf4e2;border-radius:6px;padding:8px;margin-top:6px"><b>تقييم الاستشاري:</b> '+verdict+'</div>';
     html += '</div>';
   }
 
   // ── Breakeven ──
   var beFixed=document.getElementById('be-fixed-disp'), beTotal=document.getElementById('be-total-disp');
   if(beRows.length>0) {
-    html += '<div style="background:#f2fafa;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
-    html += '<div style="font-size:12px;font-weight:700;color:#2B898C;margin-bottom:8px">Breakeven Analysis</div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
+    html += '<div style="font-size:12px;font-weight:700;color:#2f1748;margin-bottom:8px">Breakeven Analysis</div>';
     html += '<div style="display:flex;gap:16px;flex-wrap:wrap">';
-    if(beFixed) html += '<div style="font-size:12px">التكاليف الثابتة: <b style="color:#c0392b">'+beFixed.textContent+'</b></div>';
-    if(beTotal) html += '<div style="font-size:12px">Breakeven: <b style="color:#2B898C">'+beTotal.textContent+'</b></div>';
+    if(beFixed) html += '<div style="font-size:12px">التكاليف الثابتة: <b style="color:#962d38">'+beFixed.textContent+'</b></div>';
+    if(beTotal) html += '<div style="font-size:12px">Breakeven: <b style="color:#2f1748">'+beTotal.textContent+'</b></div>';
     html += '</div>';
     // List services
     html += '<div style="margin-top:8px">';
@@ -1268,17 +1268,17 @@ function buildSummary() {
   var ss=g('sw-s'),sw=g('sw-w'),so=g('sw-o'),st=g('sw-t');
   if(ss||sw||so||st) {
     html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem">';
-    if(ss) html += '<div style="background:#e8f5e9;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#2e7d32;margin-bottom:4px">💪 نقاط القوة</div><div style="font-size:11px;white-space:pre-line">'+ss+'</div></div>';
-    if(sw) html += '<div style="background:#fce4ec;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#c62828;margin-bottom:4px">⚠️ نقاط الضعف</div><div style="font-size:11px;white-space:pre-line">'+sw+'</div></div>';
-    if(so) html += '<div style="background:#e3f2fd;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#1565c0;margin-bottom:4px">🚀 الفرص</div><div style="font-size:11px;white-space:pre-line">'+so+'</div></div>';
-    if(st) html += '<div style="background:#fff3e0;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#e65100;margin-bottom:4px">🔴 التهديدات</div><div style="font-size:11px;white-space:pre-line">'+st+'</div></div>';
+    if(ss) html += '<div style="background:#d9ecec;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#1f696b;margin-bottom:4px">💪 نقاط القوة</div><div style="font-size:11px;white-space:pre-line">'+ss+'</div></div>';
+    if(sw) html += '<div style="background:#f6e3e5;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#962d38;margin-bottom:4px">⚠️ نقاط الضعف</div><div style="font-size:11px;white-space:pre-line">'+sw+'</div></div>';
+    if(so) html += '<div style="background:#d6ecf7;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#2d4a6b;margin-bottom:4px">🚀 الفرص</div><div style="font-size:11px;white-space:pre-line">'+so+'</div></div>';
+    if(st) html += '<div style="background:#f7ecd3;border-radius:8px;padding:.75rem"><div style="font-size:10px;font-weight:700;color:#8a6627;margin-bottom:4px">🔴 التهديدات</div><div style="font-size:11px;white-space:pre-line">'+st+'</div></div>';
     html += '</div>';
   }
 
   // ── Employees ──
   if(empRows.length>0) {
-    html += '<div style="background:#f2fafa;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
-    html += '<div style="font-size:12px;font-weight:700;color:#2B898C;margin-bottom:8px">الفريق</div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
+    html += '<div style="font-size:12px;font-weight:700;color:#2f1748;margin-bottom:8px">الفريق</div>';
     empRows.forEach(function(id) {
       var tr=document.getElementById(id); if(!tr)return;
       var nm=(tr.querySelector('.emp-name')?.value||'').trim();
@@ -1292,8 +1292,8 @@ function buildSummary() {
   // ── Action Plan ──
   var planDivs=document.querySelectorAll('#plan-body > div');
   if(planDivs.length>0) {
-    html += '<div style="background:#f2fafa;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
-    html += '<div style="font-size:12px;font-weight:700;color:#2B898C;margin-bottom:8px">خطة العمل التنفيذية</div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
+    html += '<div style="font-size:12px;font-weight:700;color:#2f1748;margin-bottom:8px">خطة العمل التنفيذية</div>';
     var i=0;
     planDivs.forEach(function(div) {
       var inputs=div.querySelectorAll('input,select');
@@ -1303,9 +1303,9 @@ function buildSummary() {
       var pri=inputs[4]?inputs[4].value:'';
       if(task) {
         i++;
-        var priColor=pri==='عالية'?'#c0392b':pri==='متوسطة'?'#e67e22':'#27ae60';
+        var priColor=pri==='عالية'?'#962d38':pri==='متوسطة'?'#d5a347':'#2a898c';
         html += '<div style="font-size:11px;padding:5px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;align-items:flex-start">';
-        html += '<span style="background:#2B898C;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">'+i+'</span>';
+        html += '<span style="background:#2f1748;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">'+i+'</span>';
         html += '<span style="flex:1">'+task+'</span>';
         if(who) html += '<span style="color:#888;font-size:10px">'+who+'</span>';
         if(due) html += '<span style="color:#888;font-size:10px">'+due+'</span>';
@@ -1319,8 +1319,8 @@ function buildSummary() {
   // ── Vendors ──
   var vendorDivs=document.querySelectorAll('#vendors-body > div');
   if(vendorDivs.length>0) {
-    html += '<div style="background:#f2fafa;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
-    html += '<div style="font-size:12px;font-weight:700;color:#2B898C;margin-bottom:8px">الموردين الموصى بهم</div>';
+    html += '<div style="background:#f3f0f8;border-radius:8px;padding:.85rem 1rem;margin-bottom:.75rem;border:1px solid #e0e3ef">';
+    html += '<div style="font-size:12px;font-weight:700;color:#2f1748;margin-bottom:8px">الموردين الموصى بهم</div>';
     vendorDivs.forEach(function(d) {
       var inp=d.querySelectorAll('input');
       var vn=inp[0]?inp[0].value.trim():'';
@@ -1412,23 +1412,23 @@ function addCCPeriod() {
   var num = ccPeriods.length;
   var div = document.createElement('div');
   div.id = pid;
-  div.style.cssText = 'background:#f2fafa;border:1.5px solid #aed6f1;border-radius:12px;padding:1rem;margin-bottom:1rem';
+  div.style.cssText = 'background:#f3f0f8;border:1.5px solid #dce6f1;border-radius:12px;padding:1rem;margin-bottom:1rem';
 
   var header = document.createElement('div');
   header.style.cssText = 'display:flex;align-items:center;gap:12px;margin-bottom:0.85rem;flex-wrap:wrap';
   header.innerHTML =
-    '<div style="background:#1a5276;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">' + num + '</div>' +
-    '<div style="font-size:13px;font-weight:700;color:#1a5276">فترة دفع</div>' +
+    '<div style="background:#2d4a6b;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">' + num + '</div>' +
+    '<div style="font-size:13px;font-weight:700;color:#2d4a6b">فترة دفع</div>' +
     '<div style="display:flex;align-items:center;gap:6px">' +
       '<label style="font-size:12px;color:#555">تاريخ الدفع: يوم</label>' +
       '<input type="number" min="1" max="31" placeholder="5" class="fin-inp cc-day" style="width:60px;direction:ltr">' +
       '<label style="font-size:12px;color:#555">من كل شهر</label>' +
     '</div>' +
-    '<div style="font-size:12px;font-weight:700;color:#c0392b;margin-right:auto">الإجمالي: <span id="' + pid + '-tot">0 د.ك</span></div>';
+    '<div style="font-size:12px;font-weight:700;color:#962d38;margin-right:auto">الإجمالي: <span id="' + pid + '-tot">0 د.ك</span></div>';
 
   var delBtn = document.createElement('button');
   delBtn.className = 'del-btn';
-  delBtn.style.color = '#c0392b';
+  delBtn.style.color = '#962d38';
   delBtn.textContent = 'حذف الفترة';
   delBtn.setAttribute('data-pid', pid);
   delBtn.addEventListener('click', function() { delCCPeriod(this.getAttribute('data-pid')); });
@@ -1443,7 +1443,7 @@ function addCCPeriod() {
 
   var addBtn = document.createElement('button');
   addBtn.className = 'add-btn';
-  addBtn.style.cssText = 'font-size:11px;border-color:#2471a3;color:#2471a3';
+  addBtn.style.cssText = 'font-size:11px;border-color:#2d4a6b;color:#2d4a6b';
   addBtn.textContent = '+ إضافة بند';
   addBtn.setAttribute('data-pid', pid);
   addBtn.addEventListener('click', function() { addCCItemRow(this.getAttribute('data-pid'), '', ''); });
@@ -1523,7 +1523,7 @@ function delCCPeriod(pid) {
 function updateCCSummary() {
   var totalScheduled = 0;
   var summaryHtml = '';
-  var colors = ['#1a5276','#27ae60','#2980b9','#8e44ad','#e67e22','#c0392b','#16a085'];
+  var colors = ['#2d4a6b','#2a898c','#2d4a6b','#614588','#d5a347','#962d38','#2a898c'];
   ccPeriods.forEach(function(pid, i) {
     var div = document.getElementById(pid); if(!div) return;
     var day = div.querySelector('.cc-day');
@@ -1556,7 +1556,7 @@ function updateCCSummary() {
   var diffEl = document.getElementById('cc-diff');
   if(diffEl) {
     diffEl.textContent = (diff >= 0 ? '+' : '') + fmtKD(diff);
-    diffEl.style.color = Math.abs(diff) < 1 ? '#27ae60' : '#e67e22';
+    diffEl.style.color = Math.abs(diff) < 1 ? '#2a898c' : '#d5a347';
   }
 }
 
@@ -1750,7 +1750,7 @@ function saveCurrentClient() {
   if(el) el.textContent = label;
   // Flash feedback
   var bar = document.getElementById('client-bar');
-  if(bar) { bar.style.background='#f0fdf4'; setTimeout(function(){ bar.style.background='#fff'; },800); }
+  if(bar) { bar.style.background='#d9ecec'; setTimeout(function(){ bar.style.background='#fff'; },800); }
 }
 
 function loadClient(id) {
@@ -1908,24 +1908,24 @@ function renderDrawer() {
     var date = new Date(entry.savedAt).toLocaleDateString('ar-KW');
     var isCurrent = entry.id === currentClientId;
     var div = document.createElement('div');
-    div.style.cssText = 'padding:.75rem 1rem;border-bottom:1px solid #f0f0f0;background:'+(isCurrent?'#ecf7f8':'#fff');
+    div.style.cssText = 'padding:.75rem 1rem;border-bottom:1px solid #f0f0f0;background:'+(isCurrent?'#f3f0f8':'#fff');
     var inner = document.createElement('div');
     inner.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px';
     // Info section
     var info = document.createElement('div');
     info.style.cssText = 'flex:1;cursor:pointer';
-    info.innerHTML = '<div style="font-size:13px;font-weight:700;color:#2B898C">'+(isCurrent?'📍 ':'')+entry.label+'</div><div style="font-size:10px;color:#888;margin-top:2px">آخر حفظ: '+date+'</div>';
+    info.innerHTML = '<div style="font-size:13px;font-weight:700;color:#2f1748">'+(isCurrent?'📍 ':'')+entry.label+'</div><div style="font-size:10px;color:#888;margin-top:2px">آخر حفظ: '+date+'</div>';
     info.addEventListener('click', (function(id){ return function(){ loadClient(id); }; })(entry.id));
     // Buttons
     var btns = document.createElement('div');
     btns.style.cssText = 'display:flex;gap:4px';
     var openBtn = document.createElement('button');
     openBtn.textContent = 'فتح';
-    openBtn.style.cssText = 'background:#2B898C;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit';
+    openBtn.style.cssText = 'background:#2f1748;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit';
     openBtn.addEventListener('click', (function(id){ return function(){ loadClient(id); }; })(entry.id));
     var delBtn = document.createElement('button');
     delBtn.textContent = '🗑';
-    delBtn.style.cssText = 'background:#fef2f2;color:#c0392b;border:1.5px solid #fecaca;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;font-family:inherit';
+    delBtn.style.cssText = 'background:#f6e3e5;color:#962d38;border:1.5px solid #e6c3c8;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;font-family:inherit';
     delBtn.addEventListener('click', (function(id){ return function(){ deleteClient(id); }; })(entry.id));
     btns.appendChild(openBtn);
     btns.appendChild(delBtn);

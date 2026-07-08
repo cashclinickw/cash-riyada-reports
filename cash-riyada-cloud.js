@@ -42,11 +42,11 @@
 
   // ---- Pipeline status model (client status columns) ----
   var STATUS = [
-    { key: "new",        label: "جديد",           color: "#3EADAD" },
-    { key: "first",      label: "الجلسة الأولى",   color: "#C98A2B" },
-    { key: "second",     label: "الجلسة الثانية",  color: "#6F2440" },
-    { key: "done",       label: "مكتمل",           color: "#27ae60" },
-    { key: "inprogress", label: "تحت التنفيذ",     color: "#2B898C" },
+    { key: "new",        label: "جديد",           color: "#2D4A6B" },
+    { key: "first",      label: "الجلسة الأولى",   color: "#D5A347" },
+    { key: "second",     label: "الجلسة الثانية",  color: "#614588" },
+    { key: "done",       label: "مكتمل",           color: "#2A898C" },
+    { key: "inprogress", label: "تحت التنفيذ",     color: "#2F1748" },
   ];
   window.CR_STATUS = STATUS;
   var STATUS_KEYS = STATUS.map(function (s) { return s.key; });
@@ -264,7 +264,7 @@
     bar.id = "cr-cloud-bar";
     bar.className = "no-print";
     bar.style.cssText =
-      "position:fixed;bottom:14px;left:14px;z-index:9999;background:#2E1748;color:#fff;" +
+      "position:fixed;bottom:14px;left:14px;z-index:9999;background:#2F1748;color:#fff;" +
       "border-radius:12px;padding:9px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;" +
       "font-family:inherit;font-size:12px;box-shadow:0 8px 22px rgba(30,43,122,.28);direction:rtl";
 
@@ -275,8 +275,8 @@
     bar.innerHTML =
       '<span style="font-weight:700;opacity:.9">الحالة:</span>' +
       '<select id="cr-status-select" style="border:0;border-radius:8px;padding:5px 8px;font-family:inherit;' +
-        'font-size:12px;font-weight:700;color:#2E1748;cursor:pointer">' + opts + "</select>" +
-      '<button id="cr-save-cloud" style="background:#2B898C;color:#fff;border:0;border-radius:8px;' +
+        'font-size:12px;font-weight:700;color:#2F1748;cursor:pointer">' + opts + "</select>" +
+      '<button id="cr-save-cloud" style="background:#2A898C;color:#fff;border:0;border-radius:8px;' +
         'padding:6px 11px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer">☁ حفظ للسحابة</button>' +
       '<a href="pipeline.html" style="background:rgba(255,255,255,.16);color:#fff;text-decoration:none;' +
         'border-radius:8px;padding:6px 11px;font-weight:700">📋 لوحة الحالات</a>' +
@@ -299,7 +299,7 @@
     var el = document.getElementById("cr-bar-msg");
     if (!el) return;
     el.textContent = msg || "";
-    el.style.color = ok ? "#b8f5cf" : "#ffd0d0";
+    el.style.color = ok ? "#c9e9e4" : "#f0cdd2";
     setTimeout(function () { if (el) el.textContent = ""; }, 2600);
   }
 
