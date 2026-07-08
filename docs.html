@@ -1963,43 +1963,50 @@ function crDriveDone(btn,orig,url){
   if(url){ if(confirm('✅ تم حفظ التقرير في Google Drive.\nفتح الملف الآن؟')) window.open(url,'_blank'); }
   else { alert('✅ تم إرسال التقرير إلى Google Drive (مجلد "Cash Riyada Reports").'); }
 }
+/* Build a self-contained HTML snapshot with current field values baked in.
+   Fonts/CSS are already embedded in <head>, so the server render matches the screen. */
+function crBuildFilledHTML(){
+  var liveBody=document.body;
+  var body=liveBody.cloneNode(true);
+  function bake(sel, fn){ var L=liveBody.querySelectorAll(sel), C=body.querySelectorAll(sel); for(var i=0;i<L.length;i++){ if(C[i]) fn(L[i],C[i]); } }
+  bake('input', function(l,c){ var t=(l.type||'').toLowerCase();
+    if(t==='checkbox'||t==='radio'){ if(l.checked) c.setAttribute('checked','checked'); else c.removeAttribute('checked'); }
+    else { c.setAttribute('value', l.value==null?'':l.value); } });
+  bake('textarea', function(l,c){ c.textContent = l.value==null?'':l.value; });
+  bake('select', function(l,c){ var op=c.querySelectorAll('option'); for(var o=0;o<op.length;o++){ if(op[o].value===l.value) op[o].setAttribute('selected','selected'); else op[o].removeAttribute('selected'); } });
+  // remove runtime-injected chrome + scripts from the clone
+  var kill=body.querySelectorAll('#cr-cloud, script'); for(var k=0;k<kill.length;k++){ if(kill[k].parentNode) kill[k].parentNode.removeChild(kill[k]); }
+  // head with embedded fonts/CSS (scripts stripped) + a print-reveal style
+  var head=document.head.cloneNode(true);
+  var hs=head.querySelectorAll('script'); for(var s=0;s<hs.length;s++){ if(hs[s].parentNode) hs[s].parentNode.removeChild(hs[s]); }
+  var style=document.createElement('style');
+  style.textContent='.sec{display:block!important}.btn-row{display:none!important}.tabs-wrap{display:none!important}#cr-cloud{display:none!important}';
+  head.appendChild(style);
+  var de=document.documentElement, dir=de.getAttribute('dir')||'rtl', lang=de.getAttribute('lang')||'ar';
+  return '<!doctype html>\n<html lang="'+lang+'" dir="'+dir+'">\n'+head.outerHTML+'\n'+body.outerHTML+'\n</html>';
+}
+
+/* Send the filled report to the Cash Riyada renderer (Cloud Function) -> PDF -> Shared Drive. */
 async function crSaveToDrive(){
   var btn=document.getElementById('cr-drive-btn');
-  var endpoint=((window.CR_DRIVE_ENDPOINT)||'').trim();
+  var endpoint=((window.CR_RENDER_ENDPOINT)||'').trim();
   if(!endpoint){
-    alert('لم يُضبط رابط Google Drive بعد.\nافتح ملف cash-riyada-cloud.js وألصق رابط الـ Web App في CR_DRIVE_ENDPOINT (راجع README).');
+    alert('لم يُضبط رابط خدمة الـ PDF بعد.\nبعد نشر دالة crRenderToDrive، ألصق رابطها في CR_RENDER_ENDPOINT داخل ملف cash-riyada-cloud.js.');
     return;
   }
-  if(typeof html2pdf==='undefined'){ alert('تعذّر تحميل مكتبة PDF — تأكد من الاتصال بالإنترنت.'); return; }
-  var orig=btn.textContent; btn.disabled=true; btn.textContent='⏳ جارٍ تجهيز الـ PDF…';
-  var st=document.createElement('style'); st.id='cr-pdf-style';
-  st.textContent='.cr-pdf .sec{display:block!important}.cr-pdf .btn-row{display:none!important}';
+  var orig=btn.textContent; btn.disabled=true; btn.textContent='⏳ جارٍ تجهيز التقرير…';
   try{
-    document.head.appendChild(st); document.body.classList.add('cr-pdf');
     var nm=(document.getElementById('c-name')||{}).value||'عميل';
     var dt=(document.getElementById('c-date')||{}).value||new Date().toISOString().slice(0,10);
     var filename=('Cash Riyada - '+nm+' - '+dt+'.pdf').replace(/[\\/:*?"<>|]/g,'-');
     if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
-    var mainEl=document.querySelector('.main');
-    var CRW=Math.round(Math.max(mainEl.scrollWidth, mainEl.getBoundingClientRect().width, 794));
-    var blob=await html2pdf().set({
-      margin:[8,8,10,8], filename:filename,
-      image:{type:'jpeg',quality:0.95},
-      html2canvas:{scale:2,useCORS:true,foreignObjectRendering:true,backgroundColor:'#ffffff',scrollY:0,windowWidth:CRW,width:CRW,onclone:function(cd){var m=cd.querySelector('.main');if(m){m.style.width=CRW+'px';m.style.maxWidth='none';m.style.margin='0';}if(cd.body){cd.body.style.width=CRW+'px';cd.body.style.margin='0';}}},
-      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-      pagebreak:{mode:['avoid-all','css']}
-    }).from(mainEl).outputPdf('blob');
-    document.body.classList.remove('cr-pdf'); st.remove();
-    btn.textContent='☁ جارٍ الرفع إلى Drive…';
-    var b64=await crBlobToBase64(blob);
-    // text/plain simple request => no CORS preflight; file is saved even if the response is blocked by CORS
-    try{
-      var res=await fetch(endpoint,{method:'POST',body:JSON.stringify({filename:filename,pdfBase64:b64})});
-      var out=await res.json();
-      if(out&&out.ok){ crDriveDone(btn,orig,out.url); } else { throw new Error((out&&out.error)||'unknown'); }
-    }catch(e){ crDriveDone(btn,orig,null); } // saved, but link unreadable cross-origin
+    var html=crBuildFilledHTML();
+    btn.textContent='☁ جارٍ الإنشاء والرفع إلى Drive…';
+    var res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:filename,html:html})});
+    var out=null; try{ out=await res.json(); }catch(e){}
+    if(out&&out.ok){ crDriveDone(btn,orig,out.url); }
+    else { throw new Error((out&&out.error)||('HTTP '+res.status)); }
   }catch(err){
-    document.body.classList.remove('cr-pdf'); var s=document.getElementById('cr-pdf-style'); if(s)s.remove();
     btn.disabled=false; btn.textContent=orig; alert('تعذّر إنشاء/رفع الـ PDF: '+err);
   }
 }

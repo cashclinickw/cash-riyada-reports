@@ -37,6 +37,8 @@
      After deploying the Apps Script Web App (see README / google-drive-apps-script.gs),
      paste its /exec URL between the quotes below. Leave empty to disable the Drive button. */
   window.CR_DRIVE_ENDPOINT = "https://script.google.com/macros/s/AKfycbzXV0M1OOYThVEtxlBvJNzOHsC9uOXFJ9mb_wadLxUnLnGA4EcCzxKGIsjDykCon-Js/exec";
+  // Cash Riyada PDF renderer (Cloud Function crRenderToDrive). Paste its URL here after deploy:
+  window.CR_RENDER_ENDPOINT = "https://europe-west1-cash-reports-ecc5a.cloudfunctions.net/crRenderToDrive";
 
   // ---- Pipeline status model (client status columns) ----
   var STATUS = [
