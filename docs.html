@@ -190,6 +190,12 @@ body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif!important;color:var
 .sec{display:block!important;page-break-before:always}
 .sec:first-of-type{page-break-before:auto}
 .main{max-width:100%!important;padding:0!important}
+.tbl-wrap{overflow:visible!important}
+textarea::placeholder,input::placeholder{color:transparent!important}
+[style*="color:#aaa"]{display:none!important}
+.no-pdf,.no-pdf *{display:none!important}
+#survey-log-body tr:has(td[colspan]){display:none!important}
+.swot-card:has(textarea:placeholder-shown){display:none!important}
 #cc-cover{display:flex!important}#cc-foot{display:flex!important}
 .card{background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important;break-inside:avoid;margin:0 0 .8cm!important;padding:0!important;overflow:visible!important;counter-increment:ccsec}
 .card-hd{background:transparent!important;border:0!important;border-bottom:0!important;display:grid!important;grid-template-columns:auto 1fr!important;grid-template-rows:auto auto!important;gap:0 18px!important;align-items:start!important;padding:0 0 16px!important;margin:0!important}
@@ -468,7 +474,7 @@ body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif!important;color:var
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;background:#dce6f1;padding:.85rem 1rem;border-radius:10px;flex-wrap:wrap">
         <div style="font-size:12px;font-weight:700;color:#2d4a6b">إجمالي التكاليف الثابتة الشهرية:</div>
         <div style="font-size:18px;font-weight:800;color:#962d38" id="cc-total-fixed">0 د.ك</div>
-        <div style="font-size:11px;color:#888;margin-right:auto">يُسحب تلقائياً من بوابة التحليل المالي</div>
+        <div class="no-pdf" style="font-size:11px;color:#888;margin-right:auto">يُسحب تلقائياً من بوابة التحليل المالي</div>
         <button class="btn" style="font-size:11px;padding:6px 14px" onclick="syncCashCalendar()">🔄 تحديث من التحليل المالي</button>
       </div>
 
@@ -737,7 +743,7 @@ body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif!important;color:var
       <span>استيراد وتحليل ردود العملاء قبل الجلسة</span>
     </div>
     <div class="card-body">
-      <div style="background:#f3f0f8;border-radius:10px;padding:1rem;margin-bottom:1.25rem;border:1px solid #d2d3e1">
+      <div class="no-pdf" style="background:#f3f0f8;border-radius:10px;padding:1rem;margin-bottom:1.25rem;border:1px solid #d2d3e1">
         <div style="font-size:13px;font-weight:700;color:#614588;margin-bottom:6px">&#x1F4E5; الصق رد العميل من الاستبيان</div>
         <div style="font-size:11px;color:#777;margin-bottom:8px">يمكنك لصق أي نص (من واتساب أو البريد) وسيحاول النظام استخراج البيانات تلقائياً</div>
         <textarea id="survey-raw-input" placeholder="الصق نص الرد هنا..." style="width:100%;min-height:80px;padding:8px;border:1px solid #d2d3e1;border-radius:8px;font-size:12px;font-family:inherit;resize:vertical;direction:rtl"></textarea>
@@ -2056,6 +2062,7 @@ function crBuildFilledHTML(){
   try{ccFillCover();}catch(e){}
   var liveBody=document.body;
   var body=liveBody.cloneNode(true);
+  try{ccCleanTitles(body);}catch(e){}
   function bake(sel, fn){ var L=liveBody.querySelectorAll(sel), C=body.querySelectorAll(sel); for(var i=0;i<L.length;i++){ if(C[i]) fn(L[i],C[i]); } }
   bake('input', function(l,c){ var t=(l.type||'').toLowerCase();
     if(t==='checkbox'||t==='radio'){ if(l.checked) c.setAttribute('checked','checked'); else c.removeAttribute('checked'); }
@@ -2114,7 +2121,17 @@ function ccFillCover(){
   function _z(x){var n=parseFloat(String(x).replace(/[^\d.\-\u2212]/g,'').replace('\u2212','-'));return isNaN(n)||n===0;}
   var _n=document.querySelector('#cc-cover .cc-nums');if(_n)_n.style.display=(_z(_rev)&&_z(_cost)&&_z(prof))?'none':'flex';
 }
-if(window.addEventListener){window.addEventListener('beforeprint',function(){try{ccFillCover();}catch(e){}});}
+function ccCleanTitles(root){
+  root=root||document;
+  var EMO=/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{2190}-\u{21FF}\u{25A0}-\u{25FF}\uFE0F\u200D\u20E3]/gu;
+  var els=root.querySelectorAll('.card-hd h3,.card-hd span,.swot-card label');
+  for(var i=0;i<els.length;i++){var el=els[i],t=el.textContent,c=t.replace(EMO,'');
+    c=c.replace(/\s*[\u2014\u2013]\s*/g,' \u00B7 ').replace(/\s{2,}/g,' ').trim();
+    if(c!==t){if(root===document&&!el.hasAttribute('data-cc-o'))el.setAttribute('data-cc-o',t);el.textContent=c;}}
+}
+function ccRestoreTitles(){var els=document.querySelectorAll('[data-cc-o]');
+  for(var i=0;i<els.length;i++){els[i].textContent=els[i].getAttribute('data-cc-o');els[i].removeAttribute('data-cc-o');}}
+if(window.addEventListener){window.addEventListener('beforeprint',function(){try{ccFillCover();ccCleanTitles();}catch(e){}});window.addEventListener('afterprint',function(){try{ccRestoreTitles();}catch(e){}});}
 </script>
 </body>
 </html>
