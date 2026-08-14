@@ -848,8 +848,10 @@ function sv(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
 // REVENUE
 // ═══════════════════════════════════════
 var revRows=[];
+var _rowUID=0;
+function uid(p){ return p+Date.now().toString(36)+'_'+(++_rowUID); }
 function addRevRow(){
-  var id='r'+Date.now(); revRows.push(id);
+  var id=uid('r'); revRows.push(id);
   var tr=document.createElement('tr'); tr.id=id;
   var mCells='';
   for(var m=1;m<=12;m++) mCells+='<td><input class="fin-inp rev-m'+m+'" type="number" placeholder="0" min="0" oninput="calcFin()" style="width:65px"></td>';
@@ -862,7 +864,7 @@ function addRevRow(){
 // ═══════════════════════════════════════
 var fxRows=[];
 function addFxRow(){
-  var id='f'+Date.now(); fxRows.push(id);
+  var id=uid('f'); fxRows.push(id);
   var tr=document.createElement('tr'); tr.id=id;
   var mCells='';
   for(var m=1;m<=12;m++) mCells+='<td><input class="fin-inp fx-m'+m+'" type="number" placeholder="0" min="0" oninput="calcFin()" style="width:65px"></td>';
@@ -922,7 +924,7 @@ function calcFin(){
 // ═══════════════════════════════════════
 var debtRows=[];
 function addDebtRow(){
-  var id='d'+Date.now(); debtRows.push(id);
+  var id=uid('d'); debtRows.push(id);
   var tr=document.createElement('tr'); tr.id=id;
   tr.innerHTML='<td><input class="fin-inp rtl" placeholder="الجهة"></td>'+
     '<td><input class="fin-inp" type="number" placeholder="0" style="width:90px" oninput="calcDebt()"></td>'+
@@ -944,7 +946,7 @@ function calcDebt(){
 // ═══════════════════════════════════════
 var beRows=[];
 function addBERow() {
-  var id = 'be' + Date.now();
+  var id=uid('be');
   beRows.push(id);
   var tr = document.createElement('tr');
   tr.id = id;
@@ -1116,7 +1118,7 @@ function delRow(id,arr){
 // ═══════════════════════════════════════
 var benchRows=[];
 function addBenchRow(){
-  var id='bn'+Date.now(); benchRows.push(id);
+  var id=uid('bn'); benchRows.push(id);
   var tr=document.createElement('tr'); tr.id=id;
   tr.innerHTML='<td><input class="fin-inp rtl" placeholder="اسم المنافس"></td>'+
     '<td><input class="fin-inp rtl" placeholder="مثال: 50-200 د.ك"></td>'+
@@ -1137,7 +1139,7 @@ var orgLabels={ceo:'مدير عام',manager:'مدير قسم',staff:'موظف',
 
 function addEmpRow(){
   var n=empRows.length+1;
-  var id='e'+Date.now(); empRows.push(id);
+  var id=uid('e'); empRows.push(id);
   var tr=document.createElement('tr'); tr.id=id;
   tr.innerHTML='<td style="text-align:center;font-weight:700;color:#2f1748;font-size:12px">'+n+'</td>'+
     '<td><input class="fin-inp rtl emp-name" placeholder="الاسم" oninput="syncOrg()"></td>'+
@@ -1237,7 +1239,7 @@ function renderOrg(nodes){
 var planCount=0;
 function addPlanRow(){
   planCount++;
-  var id='p'+Date.now();
+  var id=uid('p');
   var div=document.createElement('div');
   div.id=id;
   div.style.cssText='display:grid;grid-template-columns:32px 1fr 150px 140px 90px 30px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0';
@@ -1257,7 +1259,7 @@ function addPlanRow(){
 var vendorCount=0;
 function addVendorCard(){
   vendorCount++;
-  var id='v'+Date.now();
+  var id=uid('v');
   var div=document.createElement('div');
   div.id=id;
   div.style.cssText='background:#f3f0f8;border:1px solid #e0e3ef;border-radius:12px;padding:1rem;margin-bottom:10px';
@@ -1824,6 +1826,17 @@ function collectAllData() {
     div.querySelectorAll('input').forEach(function(inp,i){ row['i'+i]=inp.value; });
     data._rows.vendors.push(row);
   });
+  // Drop fully-blank dynamic rows so leftover/empty rows never persist or accumulate
+  Object.keys(data._rows).forEach(function(k){
+    if(!Array.isArray(data._rows[k])) return;
+    data._rows[k] = data._rows[k].filter(function(row){
+      return Object.keys(row).some(function(kk){
+        if(kk==='id') return false;
+        var v=row[kk];
+        return v!==undefined && v!==null && String(v).trim()!=='';
+      });
+    });
+  });
   return data;
 }
 
@@ -1849,10 +1862,10 @@ function saveCurrentClient() {
 function loadClient(id) {
   var db = cmLoad();
   var entry = db[id]; if(!entry) return;
-  currentClientId = id;
   var data = entry.data;
   // Clear current data first
   newClientSilent();
+  currentClientId = id;   // set AFTER newClientSilent (which nulls it)
   // Restore simple inputs
   Object.keys(data).forEach(function(key) {
     if(key.startsWith('_')) return;
@@ -1957,6 +1970,10 @@ function newClientSilent() {
   });
   var vb=document.getElementById('vendors-body'); if(vb) vb.innerHTML='';
   var pb=document.getElementById('plan-body'); if(pb) pb.innerHTML='';
+  var ccp=document.getElementById('cc-periods'); if(ccp) ccp.innerHTML='';
+  ccPeriods=[];
+  var cctf=document.getElementById('cc-total-fixed'); if(cctf) cctf.textContent='0 د.ك';
+  if(typeof updateCCSummary==='function') updateCCSummary();
   revRows=[]; fxRows=[]; beRows=[]; empRows=[]; debtRows=[]; benchRows=[];
   planCount=0; vendorCount=0;
   // Reset date
