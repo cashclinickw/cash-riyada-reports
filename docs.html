@@ -2226,5 +2226,131 @@ function ccPrepPrint(){
 }
 if(window.addEventListener){window.addEventListener('beforeprint',function(){try{ccPrepPrint();}catch(e){}});window.addEventListener('afterprint',function(){try{ccRestoreTitles();}catch(e){}});}
 </script>
+
+<script>
+/* ══ KUWAITI DIALECT  ->  FORMAL ARABIC ════════════════════════════
+   One button per tab. Converts only the free-text fields of the tab
+   that is currently open, keeps a snapshot, and offers an exact undo.
+   The API key lives in the Cloud Function, never in this page.      */
+
+/* Identity / label / numeric fields that must NEVER be rewritten. */
+var CC_AI_SKIP_IDS = {
+  'c-name':1,'c-phone':1,'c-email':1,'c-date':1,'c-company':1,'c-sector':1,'c-founded':1,
+  'sv-name':1,'sv-phone':1,'sv-company':1,'sv-sector':1,'sv-age':1,'sv-emps':1,'sv-rev':1,
+  'survey-raw-input':1
+};
+/* A value must have at least this many characters to be treated as prose.
+   Keeps short labels ("طلبات", "بيبي + ساي", "أرمان") out of the rewrite. */
+var CC_AI_MINLEN = 25;
+var ccAISnap = {};   /* section id -> [{el, value}] */
+
+function ccAIHasArabic(t){ return /[\u0600-\u06FF]/.test(t||''); }
+
+function ccAIFields(sec){
+  var out=[], els=sec.querySelectorAll('textarea, input[type="text"], input:not([type])');
+  for(var i=0;i<els.length;i++){
+    var el=els[i];
+    if(el.id && CC_AI_SKIP_IDS[el.id]) continue;
+    if(el.closest && el.closest('.no-pdf')) continue;
+    var v=(el.value||'').trim();
+    if(v.length < CC_AI_MINLEN) continue;
+    if(!ccAIHasArabic(v)) continue;
+    out.push(el);
+  }
+  return out;
+}
+
+function ccAIPass(){
+  var k='cr_ai_pass', p='';
+  try{ p=localStorage.getItem(k)||''; }catch(e){}
+  if(!p){
+    p=window.prompt('كلمة مرور خدمة التحويل:','')||'';
+    if(!p) return '';
+    try{ localStorage.setItem(k,p); }catch(e){}
+  }
+  return p;
+}
+function ccAIForgetPass(){ try{ localStorage.removeItem('cr_ai_pass'); }catch(e){} }
+
+function ccAISetUndo(secId,on){
+  var b=document.getElementById('ccai-undo-'+secId);
+  if(b){ b.disabled=!on; b.style.opacity=on?'1':'.45'; b.style.cursor=on?'pointer':'default'; }
+}
+
+async function ccAIConvert(secId){
+  var sec=document.getElementById('sec-'+secId); if(!sec) return;
+  var btn=document.getElementById('ccai-btn-'+secId);
+  var endpoint=((window.CR_REWRITE_ENDPOINT)||'').trim();
+  if(!endpoint){ alert('لم يُضبط رابط خدمة التحويل بعد.\nألصق رابط دالة crRewriteArabic في CR_REWRITE_ENDPOINT داخل ملف cash-riyada-cloud.js.'); return; }
+
+  var els=ccAIFields(sec);
+  if(!els.length){ alert('لا توجد نصوص طويلة قابلة للتحويل في هذا التبويب.'); return; }
+
+  var pass=ccAIPass(); if(!pass) return;
+
+  var orig=btn?btn.textContent:'';
+  if(btn){ btn.disabled=true; btn.textContent='⏳ جارٍ التحويل… ('+els.length+')'; }
+  try{
+    var items=els.map(function(el,i){ return { id:'f'+i, text:el.value }; });
+    var res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({pass:pass,items:items})});
+    var out=null; try{ out=await res.json(); }catch(e){}
+    if(!res.ok||!out||!out.ok){
+      if(res.status===401) ccAIForgetPass();
+      throw new Error((out&&out.error)||('HTTP '+res.status));
+    }
+    /* snapshot BEFORE writing, so undo is exact */
+    ccAISnap[secId]=els.map(function(el){ return {el:el, value:el.value}; });
+    var map={}; (out.items||[]).forEach(function(r){ map[r.id]=r.text; });
+    var changed=0;
+    els.forEach(function(el,i){
+      var nv=map['f'+i];
+      if(typeof nv==='string' && nv.trim() && nv!==el.value){ el.value=nv; changed++; }
+    });
+    ccAISetUndo(secId,true);
+    if(btn){ btn.disabled=false; btn.textContent=orig; }
+    alert(changed? ('✅ تم تحويل '+changed+' حقل إلى العربية الفصحى.\nإذا لم يعجبك التغيير اضغط «↩ تراجع».')
+                 : 'النص فصيح أصلاً — لم يتغيّر شيء.');
+  }catch(err){
+    if(btn){ btn.disabled=false; btn.textContent=orig; }
+    alert('تعذّر التحويل: '+err);
+  }
+}
+
+function ccAIUndo(secId){
+  var snap=ccAISnap[secId];
+  if(!snap||!snap.length){ alert('لا يوجد تحويل سابق للتراجع عنه في هذا التبويب.'); return; }
+  snap.forEach(function(r){ r.el.value=r.value; });
+  ccAISnap[secId]=null;
+  ccAISetUndo(secId,false);
+  alert('↩ تم استرجاع النص الأصلي.');
+}
+
+/* Inject the two buttons into every tab that has a button row.
+   The final-summary tab is skipped (its text is regenerated, not typed). */
+(function ccAIInstall(){
+  var secs=document.querySelectorAll('.main .sec');
+  for(var i=0;i<secs.length;i++){
+    var sec=secs[i], id=String(sec.id||'').replace(/^sec-/,'');
+    if(!id || id==='summary') continue;
+    var row=sec.querySelector('.btn-row'); if(!row) continue;
+
+    var b=document.createElement('button');
+    b.className='btn'; b.id='ccai-btn-'+id;
+    b.textContent='🔤 تحويل للعربية الفصحى';
+    b.style.cssText='border-color:#2a898c;color:#2a898c;margin-right:auto';
+    b.setAttribute('onclick',"ccAIConvert('"+id+"')");
+
+    var u=document.createElement('button');
+    u.className='btn'; u.id='ccai-undo-'+id;
+    u.textContent='↩ تراجع';
+    u.style.cssText='border-color:#962d38;color:#962d38;opacity:.45;cursor:default';
+    u.disabled=true;
+    u.setAttribute('onclick',"ccAIUndo('"+id+"')");
+
+    row.appendChild(b); row.appendChild(u);
+  }
+})();
+</script>
 </body>
 </html>

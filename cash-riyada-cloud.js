@@ -40,6 +40,10 @@
   // Cash Riyada PDF renderer (Cloud Function crRenderToDrive). Paste its URL here after deploy:
   window.CR_RENDER_ENDPOINT = "https://europe-west1-cash-reports-ecc5a.cloudfunctions.net/crRenderToDrive";
 
+/* Kuwaiti dialect -> formal Arabic rewrite (Cloud Function crRewriteArabic).
+   Paste the URL that `firebase deploy --only functions:crRewriteArabic` prints. */
+window.CR_REWRITE_ENDPOINT = "https://europe-west1-cash-reports-ecc5a.cloudfunctions.net/crRewriteArabic";
+
   // ---- Pipeline status model (client status columns) ----
   var STATUS = [
     { key: "new",        label: "جديد",           color: "#2D4A6B" },
